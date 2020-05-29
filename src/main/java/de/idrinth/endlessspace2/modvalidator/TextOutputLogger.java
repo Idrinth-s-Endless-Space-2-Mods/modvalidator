@@ -15,6 +15,7 @@ public final class TextOutputLogger implements Logger {
 
     public TextOutputLogger(File root, TextArea output) {
         this.root = root;
+        output.clear();
         this.debug(root.getAbsolutePath(), "Root set");
         this.output = output;
     }
@@ -49,18 +50,19 @@ public final class TextOutputLogger implements Logger {
         debug(context.getAbsolutePath().replace(root.getAbsolutePath(), ""), msg);
     }
 
+    public void info(String msg) {
+        log(Level.INFO, new RB(), "INFO", "PROCESS", msg);
+    }
+
     @Override
     public void log(Level level, ResourceBundle bundle, String msg, Throwable thrown) {
-    }
-    public void destruct() {
-        
     }
 
     @Override
     public void log(Level level, ResourceBundle bundle, String format, Object... params) {
         var out = String.format(FORMAT, format, params[0], params[1]);
         System.out.printf(out);
-        if (!format.equals("ERROR")) {
+        if (format.equals("DEBUG")) {
             return;
         }
         Platform.runLater(new LogEntry(out, output));

@@ -16,8 +16,8 @@
                 <Button text="Validate" onAction="#validate"/>
                 <Label text="Modfolder" />
                 <ChoiceBox fx:id="modfolder"/>
-                <Label text="against" />
-                <Label text="internal" />
+                <Label text="against " />
+                <Label text="internal " />
                 <!--<ChoiceBox fx:id="schema"/>-->
                 <Label text="Schema." />
                 </children>

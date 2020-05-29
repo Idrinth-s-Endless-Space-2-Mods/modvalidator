@@ -23,12 +23,13 @@ public class PrimaryController implements Initializable {
     private final XMLIterator iterator = new XMLIterator();
     @FXML
     private void validate() {
-        output.setText("");
+        var logger = new TextOutputLogger(modfolder.getValue(), output);
         if (null == modfolder.getValue()) {
-            output.setText("Need to choose a mod to check.");
+            logger.info("Need to choose a mod to check.");
             return;
         }
-        iterator.run(modfolder.getValue(), new TextOutputLogger(modfolder.getValue(), output));
+        iterator.run(modfolder.getValue(), logger);
+        logger.info("done");
     }
 
     @Override
