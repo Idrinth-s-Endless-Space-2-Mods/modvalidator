@@ -1,22 +1,26 @@
 package de.idrinth.endlessspace2.modvalidator;
 
 import java.io.File;
+import java.io.IOException;
 import java.lang.System.Logger;
 import java.util.Enumeration;
 import java.util.ResourceBundle;
 import javafx.application.Platform;
 import javafx.scene.control.TextArea;
 
-public final class TextOutputLogger implements Logger {
+final class TextOutputLogger implements Logger {
 
-    private final File root;
+    private final String root;
     private final TextArea output;
     private final String FORMAT = "[%s] %s: %s\n";
 
     public TextOutputLogger(File root, TextArea output) {
-        this.root = root;
+        this(path(root), output);
+    }
+    public TextOutputLogger(String root, TextArea output) {
+        this.root = root == null ? "" :  root;
         output.clear();
-        this.debug(root.getAbsolutePath(), "Root set");
+        this.debug(root, "Root set");
         this.output = output;
     }
 
@@ -30,12 +34,24 @@ public final class TextOutputLogger implements Logger {
         return true;
     }
 
+    private static final String path(File file)
+    {
+        try {
+            return file.getCanonicalPath();
+        } catch (IOException ex) {
+            return file.getAbsolutePath();
+        }
+    }
     private void error(String context, String msg) {
         log(Level.ERROR, new RB(), "ERROR", context, msg);
     }
 
+    public void warn(File context, String msg) {
+        log(Level.WARNING, new RB(), "WARNING", path(context), msg);
+    }
+
     public void error(File context, String msg) {
-        error(context.getAbsolutePath().replace(root.getAbsolutePath(), ""), msg);
+        error(path(context).replace(root, ""), msg);
     }
 
     public void error(File context, Throwable thrown) {
@@ -47,7 +63,7 @@ public final class TextOutputLogger implements Logger {
     }
 
     public void debug(File context, String msg) {
-        debug(context.getAbsolutePath().replace(root.getAbsolutePath(), ""), msg);
+        debug(path(context).replace(root, ""), msg);
     }
 
     public void info(String msg) {
