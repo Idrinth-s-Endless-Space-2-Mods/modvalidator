@@ -2,32 +2,25 @@ package de.idrinth.endlessspace2.modvalidator;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import java.io.IOException;
 
 public class App extends Application {
-
-    private static Scene scene;
     private static Stage stage;
     @Override
     public void start(Stage stage) throws IOException {
         stage.setTitle("Endless Space 2 Mod Validator");
-        scene = new Scene(loadFXML("initial"));
-        stage.setScene(scene);
-        stage.show();
         App.stage = stage;
+        toScene("initial");
     }
     public static void toPrimary() throws IOException {
-        scene = new Scene(loadFXML("primary"));
-        stage.setScene(scene);
-        stage.show();
+        toScene("primary");
     }
-
-    private static Parent loadFXML(String fxml) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(fxml + ".fxml"));
-        return fxmlLoader.load();
+    private static void toScene(String scene) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(scene + ".fxml"));
+        stage.setScene(new Scene(fxmlLoader.load()));
+        stage.show();
     }
 
     public static void main(String[] args) {
