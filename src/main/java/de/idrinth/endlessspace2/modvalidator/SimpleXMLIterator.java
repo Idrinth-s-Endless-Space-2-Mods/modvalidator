@@ -133,9 +133,10 @@ class SimpleXMLIterator {
                     }
                     path = path.replaceAll("!", "");
                     while (path.contains(",")) {
-                        var path2 = path.substring(path.indexOf(",")+1).trim();
+                        var position = path.lastIndexOf(",");
+                        var path2 = path.substring(position+1).trim();
                         sd.addReference(path2, atts.getValue("TargetProperty"));
-                        path = path.substring(0, path.lastIndexOf(","));
+                        path = path.substring(0, position);
                     }
                     sd.addReference(path, atts.getValue("TargetProperty"));
             }

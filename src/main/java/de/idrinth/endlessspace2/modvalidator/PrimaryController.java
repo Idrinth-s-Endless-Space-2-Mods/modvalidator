@@ -7,7 +7,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.ResourceBundle;
@@ -18,29 +17,14 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextArea;
 import javafx.util.StringConverter;
 
-public class PrimaryController implements Initializable {
-
-    @FXML
-    private TextArea output;
+public class PrimaryController extends ThreaddedController implements Initializable {
     @FXML
     private ChoiceBox<File> modfolder;
     private XMLIterator iterator;
     private SimulationDescriptors rootList;
     @FXML
     private void validate() {
-        var logger = new TextOutputLogger(modfolder.getValue(), output);
-        if (null == modfolder.getValue()) {
-            logger.info("You need to choose a mod to check.");
-            return;
-        }
-        logger.info("xsd validation");
-        var list = rootList.clone();
-        iterator.run(modfolder.getValue(), logger, list);
-        logger.info("logic validation");
-        list.values().forEach((sd) -> {
-            sd.check(logger, list);
-        });
-        logger.info("done");
+        execute();
     }
 
     @Override
@@ -56,11 +40,29 @@ public class PrimaryController implements Initializable {
         if (workshop.isDirectory()) {
             files.addAll(Arrays.asList(workshop.listFiles(new FolderFilter())));
         }
+        files.add(Data.gameDir());
         modfolder.setConverter(new FileConverter());
         modfolder.setItems(files);
     }
+
+    @Override
+    public void run() {
+        var logger = new TextOutputLogger(modfolder.getValue(), output);
+        if (null == modfolder.getValue()) {
+            logger.info("You need to choose a mod to check.");
+            return;
+        }
+        logger.info("xsd validation");
+        var list = rootList.clone();
+        iterator.run(modfolder.getValue(), logger, list);
+        logger.info("logic validation");
+        list.values().forEach((sd) -> {
+            sd.check(logger, list);
+        });
+        logger.info("done");
+    }
     private class FileConverter extends StringConverter<File> {
-        private HashSet<Identifier> ids = new HashSet<>();
+        private final HashSet<Identifier> ids = new HashSet<>();
         @Override
         public String toString(File file) {
             for (var id : ids) {
@@ -97,10 +99,16 @@ public class PrimaryController implements Initializable {
                 full = file.getCanonicalPath();
                 if (full.contains("workshop")) {
                     path = "workshop://"+full.substring(full.lastIndexOf("workshop")+24);
-                } else {
+                    name = file.listFiles(new XMLNotRegistry())[0].getName().replace(".xml", "");
+                } else if(full.contains("Community")) {
                     path = "local://"+full.substring(full.lastIndexOf("Community")+10);
+                    name = file.listFiles(new XMLNotRegistry())[0].getName().replace(".xml", "");
+                } else if(full.endsWith("Public")) {
+                    path = "game://Endless Space 2";
+                    name = "Base";
+                } else {
+                    throw new IOException(full+" can't be recognised as a folder");
                 }
-                name = file.listFiles(new XMLNotRegistry())[0].getName().replace(".xml", "");
                 this.file = file;
             }
             public String id() {

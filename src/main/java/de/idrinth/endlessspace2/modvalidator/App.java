@@ -13,13 +13,14 @@ public class App extends Application {
     private static Stage stage;
     @Override
     public void start(Stage stage) throws IOException {
-        scene = new Scene(loadFXML("initial"), 640, 480);
+        stage.setTitle("Endless Space 2 Mod Validator");
+        scene = new Scene(loadFXML("initial"));
         stage.setScene(scene);
         stage.show();
         App.stage = stage;
     }
     public static void toPrimary() throws IOException {
-        scene = new Scene(loadFXML("primary"), 640, 480);
+        scene = new Scene(loadFXML("primary"));
         stage.setScene(scene);
         stage.show();
     }

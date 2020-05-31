@@ -6,6 +6,7 @@ class Data {
     private static XMLIterator iterator;
     private static SimulationDescriptors rootList;
     private static File workshopDir;
+    private static File gameDir;
 
     public static void setIterator(XMLIterator iterator) {
         Data.iterator = iterator;
@@ -18,6 +19,9 @@ class Data {
     public static void setWorkshopDir(File workshopDir) {
         Data.workshopDir = workshopDir;
     }
+    public static void setGameDir(File gameDir) {
+        Data.gameDir = gameDir;
+    }
 
     public static XMLIterator iterator() {
         return iterator;
@@ -27,5 +31,8 @@ class Data {
     }
     public static File workshopDir() {
         return workshopDir;
+    }
+    public static File gameDir() {
+        return gameDir;
     }
 }

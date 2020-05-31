@@ -2,18 +2,22 @@ package de.idrinth.endlessspace2.modvalidator;
 
 import java.io.File;
 import java.io.IOException;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 
-public class InitialController {
-    @FXML
-    private TextArea output;
+public class InitialController extends ThreaddedController {
     @FXML
     private TextField endlessSpaceFolder;
     @FXML
-    private void start() throws IOException {
+    private void start() {
+        execute();
+    }
+
+    @Override
+    public void run() {
         var logger = new TextOutputLogger(endlessSpaceFolder.getText(), output);
+        logger.info("checking requirements");
         if (null == endlessSpaceFolder.getText() || endlessSpaceFolder.getText().isEmpty()) {
             logger.info("You need to provide the folder of endless space 2.");
             return;
@@ -30,11 +34,27 @@ public class InitialController {
             logger.info("Can't find Schema folder at the place you pointed to.");
             return;
         }
+        logger.info("reading in game dir");
         iterator.run(simFolder, logger, list);
         logger.info("done");
         Data.setIterator(new XMLIterator(schemaFolder.getParentFile()));
         Data.setRootList(list);
+        Data.setGameDir(new File(endlessSpaceFolder.getText()+"/Public"));
         Data.setWorkshopDir(new File(endlessSpaceFolder.getText()+"/../../workshop/content/392110"));
-        App.toPrimary();
+        Platform.runLater(new SwitchToPrimary(logger));
+    }
+    private class SwitchToPrimary implements Runnable {
+        private final TextOutputLogger logger;
+
+        public SwitchToPrimary(TextOutputLogger logger) {
+            this.logger = logger;
+        }
+        public void run() {
+            try {
+                App.toPrimary();
+            } catch (IOException ex) {
+                logger.error(Data.gameDir(), ex);
+            }
+        }
     }
 }

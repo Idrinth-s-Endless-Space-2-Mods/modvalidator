@@ -10,18 +10,19 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane  xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.idrinth.endlessspace2.modvalidator.InitialController">
+<AnchorPane xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.idrinth.endlessspace2.modvalidator.InitialController">
     <children>
-        <HBox alignment="CENTER">
+        <VBox spacing="10.0" AnchorPane.topAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0">
             <children>
-                <Label text="Endless Space 2 Folder:"/>
-                <TextField fx:id="endlessSpaceFolder"/>
-                <Button text="Start" onAction="#start"/>
+                <HBox spacing="20.0" AnchorPane.topAnchor="0.0">
+                    <children>
+                        <Label text="Endless Space 2 Folder:"/>
+                        <TextField fx:id="endlessSpaceFolder"/>
+                        <Button text="Start" onAction="#start"/>
+                    </children>
+                </HBox>
+                <TextArea VBox.vgrow="ALWAYS" AnchorPane.bottomAnchor="0.0" maxHeight="Infinity" maxWidth="Infinity" editable="false" fx:id="output"/>
             </children>
-        </HBox>
-        <VBox alignment="CENTER" spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="20.0">
-            <Label text="Output:" />
-            <TextArea maxHeight="Infinity" editable="false" fx:id="output"/>
         </VBox>
     </children>
 </AnchorPane>
