@@ -14,7 +14,6 @@ import javafx.collections.ObservableListBase;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.TextArea;
 import javafx.util.StringConverter;
 
 public class PrimaryController extends ThreaddedController implements Initializable {
@@ -57,7 +56,7 @@ public class PrimaryController extends ThreaddedController implements Initializa
         iterator.run(modfolder.getValue(), logger, list);
         logger.info("logic validation");
         list.values().forEach((sd) -> {
-            sd.check(logger, list);
+            sd.check(logger);
         });
         logger.info("done");
     }

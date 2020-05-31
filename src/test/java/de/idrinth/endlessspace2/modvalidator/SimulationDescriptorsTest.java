@@ -1,34 +1,32 @@
 package de.idrinth.endlessspace2.modvalidator;
 
-import java.io.File;
-import java.util.Collection;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
+import static org.mockito.Mockito.when;
+import org.mockito.junit.jupiter.MockitoExtension;
 
+@ExtendWith(MockitoExtension.class)
 public class SimulationDescriptorsTest {
-
-    /**
-     * Test of put method, of class SimulationDescriptors.
-     */
+    @Mock
+    public SimulationDescriptor sd;
     @Test
     public void testPut() {
         System.out.println("put");
-        var name = "";
-        var sd = new SimulationDescriptor(name, new File("."));
+        when(sd.clone()).thenReturn(sd);
+        var name = "n";
         var instance = new SimulationDescriptors();
         assertEquals(null, instance.get(name));
         instance.put(name, sd);
         assertEquals(sd, instance.get(name));
     }
 
-    /**
-     * Test of get method, of class SimulationDescriptors.
-     */
     @Test
     public void testGet() {
         System.out.println("get");
-        var name = "";
-        var sd = new SimulationDescriptor(name, new File("."));
+        when(sd.clone()).thenReturn(sd);
+        var name = "name";
         var instance = new SimulationDescriptors();
         assertEquals(null, instance.get(name));
         instance.put(name, sd);
@@ -40,9 +38,8 @@ public class SimulationDescriptorsTest {
         System.out.println("values");
         var instance = new SimulationDescriptors();
         assertEquals(true, instance.values().isEmpty());
-        instance.put("", new SimulationDescriptor("", new File(".")));
+        instance.put("", sd);
         assertEquals(false, instance.values().isEmpty());
-        assertEquals(1, instance.values().size());
         assertEquals(1, instance.values().size());
     }
 
@@ -52,7 +49,7 @@ public class SimulationDescriptorsTest {
         var name = "";
         var instance = new SimulationDescriptors();
         assertEquals(false, instance.has(name));
-        instance.put(name, new SimulationDescriptor(name, new File(".")));
+        instance.put(name, sd);
         assertEquals(true, instance.has(name));
     }
 

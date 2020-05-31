@@ -27,8 +27,11 @@ class SimulationDescriptors
     }
     public SimulationDescriptor get(String name) {
         var result = data.get(name);
+        System.out.println("GET " + name);
+        System.out.println(result);
         if (result != null) {
             result = result.clone();
+            System.out.println(result);
             for (Pair pair : keysToCopy) {
                 if (name.equals(pair.to)) {
                     result.addMissingProperties(get(pair.from));
@@ -60,12 +63,14 @@ class SimulationDescriptors
         final SimulationDescriptors other = (SimulationDescriptors) obj;
         return Objects.equals(this.data, other.data);
     }
-
     @Override
     public SimulationDescriptors clone()
     {
         var result = new SimulationDescriptors();
         result.data.putAll(data);
+        for (var sd : result.values()) {
+            sd.setMap(result);
+        }
         return result;
     }
     private class Pair {

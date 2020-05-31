@@ -8,7 +8,7 @@ import java.util.ResourceBundle;
 import javafx.application.Platform;
 import javafx.scene.control.TextArea;
 
-final class TextOutputLogger implements Logger {
+class TextOutputLogger implements Logger {
 
     private final String root;
     private final TextArea output;
@@ -78,7 +78,7 @@ final class TextOutputLogger implements Logger {
     public void log(Level level, ResourceBundle bundle, String format, Object... params) {
         var out = String.format(FORMAT, format, params[0], params[1]);
         System.out.printf(out);
-        if (format.equals("DEBUG")) {
+        if (level == Level.DEBUG) {
             return;
         }
         Platform.runLater(new LogEntry(out, output));

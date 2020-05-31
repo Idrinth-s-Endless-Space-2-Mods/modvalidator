@@ -116,11 +116,11 @@ class SimpleXMLIterator {
         public void startElement(String namespaceURI, String localName, String qName, Attributes atts) throws SAXException {
             switch (localName) {
                 case "SimulationDescriptor":
-                    sd = new SimulationDescriptor(atts.getValue("Name"), source, validate);
                     type = atts.getValue("Type");
                     if (type.equals("Class")) {
                         type = atts.getValue("Name");
                     }
+                    sd = new SimulationDescriptor(atts.getValue("Name"), atts.getValue("Type"), source, map, validate);
                     return;
                 case "Property":
                     sd.addProperty(atts.getValue("Name"));
