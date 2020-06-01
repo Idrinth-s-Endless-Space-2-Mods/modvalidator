@@ -1,5 +1,7 @@
-package de.idrinth.endlessspace2.modvalidator;
+package de.idrinth.endlessspace2.modvalidator.xmliterator;
 
+import de.idrinth.endlessspace2.modvalidator.SimulationDescriptors;
+import de.idrinth.endlessspace2.modvalidator.TextOutputLogger;
 import java.io.File;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -13,7 +15,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.xml.sax.SAXException;
 
 @ExtendWith(MockitoExtension.class)
-public class XMLIteratorTest {
+public class ValidatingXMLIteratorTest {
     @Mock
     public TextOutputLogger logger;
     @Mock
@@ -23,9 +25,9 @@ public class XMLIteratorTest {
     public void testRunWithCase1() {
         System.out.println("run");
         var folder = new File(ROOT + "/xml-case-1");
-        var instance = new XMLIterator(folder);
+        var instance = new ValidatingXMLIterator(folder, null);
         var file = new File(ROOT + "/xml-case-1/example.xml");
-        instance.run(folder, logger, simulationDescriptors);
+        instance.run(folder, logger, simulationDescriptors, null);
         verify(logger, times(1)).debug(file, "starting");
         verify(logger, times(1)).debug(file, "schema example.xsd");
         verify(logger, times(1)).error(eq(file), isA(SAXException.class));
@@ -36,55 +38,73 @@ public class XMLIteratorTest {
     public void testRunWithCase2() {
         System.out.println("run");
         var folder = new File(ROOT + "/xml-case-2");
-        var instance = new XMLIterator(folder);
+        var instance = new ValidatingXMLIterator(folder, null);
         var file1 = new File(ROOT + "/xml-case-2/example.xml");
         var file2 = new File(ROOT + "/xml-case-2/subfolder/example.xml");
-        instance.run(folder, logger, simulationDescriptors);
+        instance.run(folder, logger, simulationDescriptors, null);
         verify(logger, times(1)).debug(file1, "starting");
         verify(logger, times(1)).debug(file1, "schema example.xsd");
         verify(logger, times(1)).error(eq(file1), isA(SAXException.class));
         verify(logger, times(1)).debug(file1, "done");
         verify(logger, times(1)).debug(file2, "starting");
-        verify(logger, times(1)).debug(file2, "schema example.xsd");
+        verify(logger, times(1)).debug(file2, "schema /example.xsd");
+        verify(logger, times(1)).warn(file2, "schema starts with a none-existing path: Documentation/example.xsd");
         verify(logger, times(1)).error(eq(file2), isA(SAXException.class));
         verify(logger, times(1)).debug(file2, "done");
+        verifyNoMoreInteractions(logger);
+    }
+    @Test
+    public void testRunWithCase3() {
+        System.out.println("run");
+        var folder = new File(ROOT + "/xml-case-3");
+        var instance = new ValidatingXMLIterator(folder, null);
+        var file = new File(ROOT + "/xml-case-3/SimulationDescriptors[Idrinth][Garrison].xml");
+        instance.run(folder, logger, simulationDescriptors, null);
+        verify(logger, times(1)).debug(file, "starting");
+        verify(logger, times(1)).debug(file, "schema Schemas/Amplitude.Unity.Simulation.SimulationDescriptor.xsd");
+        verify(logger, times(1)).error(eq(file), isA(SAXException.class));
+        verify(logger, times(1)).debug(file, "done");
         verifyNoMoreInteractions(logger);
     }
 
     @Test
     public void testRunWithCase1Directory() {
         System.out.println("run");
-        var instance = new XMLIterator();
         var folder = new File(ROOT + "/xml-case-1");
+        var instance = new ValidatingXMLIterator(folder, null);
         var file = new File(ROOT + "/xml-case-1/example.xml");
-        instance.run(folder, logger, simulationDescriptors);
+        instance.run(folder, logger, simulationDescriptors, null);
         verify(logger, times(1)).debug(file, "starting");
         verify(logger, times(1)).debug(file, "schema example.xsd");
+        verify(logger, times(1)).error(eq(file), isA(SAXException.class));
         verify(logger, times(1)).debug(file, "done");
         verifyNoMoreInteractions(logger);
     }
     @Test
-    public void testRunWithADirectory() {
+    public void testRunWithCase2Directory() {
         System.out.println("run");
-        var instance = new XMLIterator();
         var folder = new File(ROOT + "/xml-case-2");
+        var instance = new ValidatingXMLIterator(folder, null);
         var file1 = new File(ROOT + "/xml-case-2/example.xml");
         var file2 = new File(ROOT + "/xml-case-2/subfolder/example.xml");
-        instance.run(folder, logger, simulationDescriptors);
+        instance.run(folder, logger, simulationDescriptors, null);
         verify(logger, times(1)).debug(file1, "starting");
         verify(logger, times(1)).debug(file1, "schema example.xsd");
+        verify(logger, times(1)).error(eq(file1), isA(SAXException.class));
         verify(logger, times(1)).debug(file1, "done");
         verify(logger, times(1)).debug(file2, "starting");
-        verify(logger, times(1)).debug(file2, "schema example.xsd");
+        verify(logger, times(1)).warn(file2, "schema starts with a none-existing path: Documentation/example.xsd");
+        verify(logger, times(1)).debug(file2, "schema /example.xsd");
+        verify(logger, times(1)).error(eq(file2), isA(SAXException.class));
         verify(logger, times(1)).debug(file2, "done");
         verifyNoMoreInteractions(logger);
     }
     @Test
     public void testRunWithANoneDirectory() {
         System.out.println("run");
-        var instance = new XMLIterator();
         var file = new File("src/test/resources/de/idrinth/endlessspace2/modvalidator/example.xml");
-        instance.run(file, logger, simulationDescriptors);
+        var instance = new ValidatingXMLIterator(file, null);
+        instance.run(file, logger, simulationDescriptors, null);
         verify(logger, times(1)).error(file, "Failed to get children");
         verifyNoMoreInteractions(logger);
     }

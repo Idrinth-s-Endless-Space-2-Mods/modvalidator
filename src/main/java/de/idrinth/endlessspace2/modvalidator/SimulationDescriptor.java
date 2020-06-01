@@ -5,7 +5,7 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-class SimulationDescriptor {
+public class SimulationDescriptor {
     private final String name;
     private final String type;
     private final File source;

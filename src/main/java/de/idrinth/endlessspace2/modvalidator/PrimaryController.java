@@ -1,5 +1,7 @@
 package de.idrinth.endlessspace2.modvalidator;
 
+import de.idrinth.endlessspace2.modvalidator.runner.Validation;
+import de.idrinth.endlessspace2.modvalidator.xmliterator.ValidatingXMLIterator;
 import java.io.File;
 import java.io.FileFilter;
 import java.io.FilenameFilter;
@@ -19,11 +21,11 @@ import javafx.util.StringConverter;
 public class PrimaryController extends ThreaddedController implements Initializable {
     @FXML
     private ChoiceBox<File> modfolder;
-    private XMLIterator iterator;
+    private ValidatingXMLIterator iterator;
     private SimulationDescriptors rootList;
     @FXML
     private void validate() {
-        execute();
+        execute(new Validation(modfolder.getValue(), iterator, rootList, new TextOutputLogger(modfolder.getValue(), new TAWrapper(output))));
     }
 
     @Override
@@ -43,23 +45,6 @@ public class PrimaryController extends ThreaddedController implements Initializa
         files.add(helper.gameDir());
         modfolder.setConverter(new FileConverter());
         modfolder.setItems(files);
-    }
-
-    @Override
-    public void run() {
-        var logger = new TextOutputLogger(modfolder.getValue(), new TAWrapper(output));
-        if (null == modfolder.getValue()) {
-            logger.info("You need to choose a mod to check.");
-            return;
-        }
-        logger.info("xsd validation");
-        var list = rootList.clone();
-        iterator.run(modfolder.getValue(), logger, list);
-        logger.info("logic validation");
-        list.values().forEach((sd) -> {
-            sd.check(logger);
-        });
-        logger.info("done");
     }
     private class FileConverter extends StringConverter<File> {
         private final HashSet<Identifier> ids = new HashSet<>();

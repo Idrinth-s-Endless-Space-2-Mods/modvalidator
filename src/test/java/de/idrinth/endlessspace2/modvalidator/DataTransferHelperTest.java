@@ -1,5 +1,6 @@
 package de.idrinth.endlessspace2.modvalidator;
 
+import de.idrinth.endlessspace2.modvalidator.xmliterator.ValidatingXMLIterator;
 import java.io.File;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -16,7 +17,7 @@ public class DataTransferHelperTest {
     @Mock
     public SimulationDescriptors list;
     @Mock
-    public XMLIterator iterator;
+    public ValidatingXMLIterator iterator;
     @AfterEach
     @BeforeEach
     public void clean() {
@@ -26,7 +27,7 @@ public class DataTransferHelperTest {
     @Test
     public void testIterator() {
         System.out.println("iterator");
-        var result = new XMLIterator(new File("."));
+        var result = new ValidatingXMLIterator(null, null);
         var helper = new DataTransferHelper(result, list, file, file);
         assertEquals(result, helper.iterator());
     }

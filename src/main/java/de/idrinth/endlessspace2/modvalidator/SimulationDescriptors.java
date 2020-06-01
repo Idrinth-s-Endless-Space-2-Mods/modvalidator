@@ -6,7 +6,7 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-class SimulationDescriptors
+public class SimulationDescriptors
 {
     private final HashMap<String, SimulationDescriptor> data;
     private final SimulationDescriptorAdjuster adjuster;

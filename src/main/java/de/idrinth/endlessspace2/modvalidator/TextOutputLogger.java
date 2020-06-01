@@ -6,7 +6,7 @@ import java.lang.System.Logger;
 import java.util.Enumeration;
 import java.util.ResourceBundle;
 
-class TextOutputLogger implements Logger {
+public class TextOutputLogger implements Logger {
 
     private final String root;
     private final TAWrapper output;

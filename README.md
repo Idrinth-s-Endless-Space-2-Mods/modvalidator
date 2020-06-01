@@ -2,8 +2,9 @@
 
 [![Build Status](https://travis-ci.org/Idrinth-s-Endless-Space-2-Mods/modvalidator.svg?branch=master)](https://travis-ci.org/Idrinth-s-Endless-Space-2-Mods/modvalidator)
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/ccee5c155dcb4c41af5a7444e5d378bf)](https://www.codacy.com/gh/Idrinth-s-Endless-Space-2-Mods/modvalidator?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Idrinth-s-Endless-Space-2-Mods/modvalidator&amp;utm_campaign=Badge_Grade)
+[![Codacy Badge](https://app.codacy.com/project/badge/Coverage/ccee5c155dcb4c41af5a7444e5d378bf)](https://www.codacy.com/gh/Idrinth-s-Endless-Space-2-Mods/modvalidator?utm_source=github.com&utm_medium=referral&utm_content=Idrinth-s-Endless-Space-2-Mods/modvalidator&utm_campaign=Badge_Coverage)
 
-Download the jar of the latest release to use.
+Download the jar of the [latest release](https://github.com/Idrinth-s-Endless-Space-2-Mods/modvalidator/releases/latest) to use.
 
 ## Validations
 

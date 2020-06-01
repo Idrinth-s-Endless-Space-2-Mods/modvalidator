@@ -5,11 +5,11 @@ import java.util.concurrent.Executors;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;
 
-public abstract class ThreaddedController implements Runnable {
+public abstract class ThreaddedController {
     @FXML
     protected TextArea output;
     private final ExecutorService te = Executors.newSingleThreadExecutor();
-    protected final void execute() {
-        te.submit(this);
+    protected final void execute(Runnable task) {
+        te.submit(task);
     }
 }
