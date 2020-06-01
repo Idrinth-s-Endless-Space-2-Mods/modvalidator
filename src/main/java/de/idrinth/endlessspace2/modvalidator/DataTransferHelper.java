@@ -3,36 +3,39 @@ package de.idrinth.endlessspace2.modvalidator;
 import java.io.File;
 
 class DataTransferHelper {
-    private static XMLIterator iterator;
-    private static SimulationDescriptors rootList;
-    private static File workshopDir;
-    private static File gameDir;
+    private static DataTransferHelper instance;
+    private final XMLIterator iterator;
+    private final SimulationDescriptors rootList;
+    private final File workshopDir;
+    private final File gameDir;
 
-    public static void setIterator(XMLIterator iterator) {
-        DataTransferHelper.iterator = iterator;
+    public DataTransferHelper(XMLIterator iterator, SimulationDescriptors rootList, File workshopDir, File gameDir) {
+        this.iterator = iterator;
+        this.rootList = rootList;
+        this.workshopDir = workshopDir;
+        this.gameDir = gameDir;
     }
 
-    public static void setRootList(SimulationDescriptors rootList) {
-        DataTransferHelper.rootList = rootList;
+    public static DataTransferHelper instance() {
+        var local = instance;
+        instance = null;
+        return local;
     }
 
-    public static void setWorkshopDir(File workshopDir) {
-        DataTransferHelper.workshopDir = workshopDir;
-    }
-    public static void setGameDir(File gameDir) {
-        DataTransferHelper.gameDir = gameDir;
+    public static void create(XMLIterator iterator, SimulationDescriptors rootList, File workshopDir, File gameDir) {
+        instance = new DataTransferHelper(iterator, rootList, workshopDir, gameDir);
     }
 
-    public static XMLIterator iterator() {
+    public XMLIterator iterator() {
         return iterator;
     }
-    public static SimulationDescriptors rootList() {
+    public SimulationDescriptors rootList() {
         return rootList;
     }
-    public static File workshopDir() {
+    public File workshopDir() {
         return workshopDir;
     }
-    public static File gameDir() {
+    public File gameDir() {
         return gameDir;
     }
 }

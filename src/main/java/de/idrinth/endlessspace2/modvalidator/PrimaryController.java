@@ -28,18 +28,19 @@ public class PrimaryController extends ThreaddedController implements Initializa
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        iterator = DataTransferHelper.iterator();
-        rootList = DataTransferHelper.rootList();
+        var helper = DataTransferHelper.instance();
+        iterator = helper.iterator();
+        rootList = helper.rootList();
         var files = new Observed<File>();
         var folder = new File(System.getProperty("user.home") + "/Documents/Endless space 2/Community");
         if (folder.isDirectory()) {
             files.addAll(Arrays.asList(folder.listFiles(new FolderFilter())));
         }
-        var workshop = DataTransferHelper.workshopDir();
+        var workshop = helper.workshopDir();
         if (workshop.isDirectory()) {
             files.addAll(Arrays.asList(workshop.listFiles(new FolderFilter())));
         }
-        files.add(DataTransferHelper.gameDir());
+        files.add(helper.gameDir());
         modfolder.setConverter(new FileConverter());
         modfolder.setItems(files);
     }
@@ -74,9 +75,8 @@ public class PrimaryController extends ThreaddedController implements Initializa
                 ids.add(id);
                 return id.id();
             } catch (IOException ex) {
-                ex.printStackTrace();
+                return "";
             }
-            return "";
         }
 
         @Override

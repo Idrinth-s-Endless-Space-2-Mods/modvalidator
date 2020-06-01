@@ -37,23 +37,27 @@ public class InitialController extends ThreaddedController {
         logger.info("reading in game dir");
         iterator.run(simFolder, logger, list);
         logger.info("done");
-        DataTransferHelper.setIterator(new XMLIterator(schemaFolder.getParentFile()));
-        DataTransferHelper.setRootList(list);
-        DataTransferHelper.setGameDir(new File(endlessSpaceFolder.getText()+"/Public"));
-        DataTransferHelper.setWorkshopDir(new File(endlessSpaceFolder.getText()+"/../../workshop/content/392110"));
-        Platform.runLater(new SwitchToPrimary(logger));
+        var gameDir = new File(endlessSpaceFolder.getText()+"/Public");
+        DataTransferHelper.create(
+            new XMLIterator(schemaFolder.getParentFile()),
+            list,
+            new File(endlessSpaceFolder.getText()+"/../../workshop/content/392110"),
+            gameDir
+        );
+        Platform.runLater(new SwitchToPrimary(logger, gameDir));
     }
     private class SwitchToPrimary implements Runnable {
         private final TextOutputLogger logger;
-
-        public SwitchToPrimary(TextOutputLogger logger) {
+        private final File gameDir;
+        public SwitchToPrimary(TextOutputLogger logger, File gameDir) {
             this.logger = logger;
+            this.gameDir = gameDir;
         }
         public void run() {
             try {
                 App.toPrimary();
             } catch (IOException ex) {
-                logger.error(DataTransferHelper.gameDir(), ex);
+                logger.error(DataTransferHelper.instance().gameDir(), ex);
             }
         }
     }
