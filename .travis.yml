@@ -3,8 +3,8 @@ jdk: openjdk14
 branches:
   only:
   - master
+before_script:
 script: mvn clean install
-before:
   - wget -O ~/codacy-coverage-reporter-assembly-latest.jar https://idrinth.de/codacy-coverage-reporter-assembly-latest.jar
 after_success: java -cp ~/codacy-coverage-reporter-assembly-latest.jar com.codacy.CodacyCoverageReporter --language Java -r ./target/site/jacoco/jacoco.xml
 after_failure: java -cp ~/codacy-coverage-reporter-assembly-latest.jar com.codacy.CodacyCoverageReporter --language Java -r ./target/site/jacoco/jacoco.xml

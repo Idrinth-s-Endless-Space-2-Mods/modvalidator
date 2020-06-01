@@ -162,6 +162,7 @@ class XMLIterator {
                     }
                     sd.addReference(path, atts.getValue("TargetProperty"));
                     return;
+                default:
             }
         }
         @Override
@@ -171,7 +172,5 @@ class XMLIterator {
                 sd = null;
             }
         }
-        @Override
-        public void endDocument() throws SAXException {}
     }
 }

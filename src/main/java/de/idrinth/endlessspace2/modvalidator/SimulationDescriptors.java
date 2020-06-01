@@ -8,37 +8,17 @@ import java.util.Set;
 
 class SimulationDescriptors
 {
-    private static Set<Pair> keysToCopy;
     private final HashMap<String, SimulationDescriptor> data;
+    private final SimulationDescriptorAdjuster adjuster;
     public SimulationDescriptors() {
         data = new HashMap<>();
-        if (null != keysToCopy) {
-            return;
-        }
-        //Stuff that is explained nowhere and still works
-        keysToCopy = new HashSet<>();
-        keysToCopy.add(new Pair("ClassStarSystem", "ClassColonizedStarSystem"));
-        keysToCopy.add(new Pair("ClassColonizedStarSystem", "ClassExploitedStarSystem"));
-        keysToCopy.add(new Pair("ClassPlanet", "ClassColonizedPlanet"));
-        keysToCopy.add(new Pair("ClassGarrison", "ClassGarrisonFleet"));
+        adjuster = new SimulationDescriptorAdjuster();
     }
     public void put(String name, SimulationDescriptor sd) {
         data.put(name, sd);
     }
     public SimulationDescriptor get(String name) {
-        var result = data.get(name);
-        System.out.println("GET " + name);
-        System.out.println(result);
-        if (result != null) {
-            result = result.clone();
-            System.out.println(result);
-            for (Pair pair : keysToCopy) {
-                if (name.equals(pair.to)) {
-                    result.addMissingProperties(get(pair.from));
-                }
-            }
-        }
-        return result;
+        return adjuster.get(name, data);
     }
     public Collection<SimulationDescriptor> values() {
         return data.values();
@@ -73,31 +53,55 @@ class SimulationDescriptors
         }
         return result;
     }
-    private class Pair {
-        public final String from;
-        public final String to;
-
-        public Pair(String from, String to) {
-            this.from = from;
-            this.to = to;
+    private class SimulationDescriptorAdjuster {
+        private final Set<Pair> keysToCopy;
+        public SimulationDescriptorAdjuster() {
+            //Stuff that is explained nowhere and still works
+            keysToCopy = new HashSet<>();
+            keysToCopy.add(new Pair("ClassStarSystem", "ClassColonizedStarSystem"));
+            keysToCopy.add(new Pair("ClassColonizedStarSystem", "ClassExploitedStarSystem"));
+            keysToCopy.add(new Pair("ClassPlanet", "ClassColonizedPlanet"));
+            keysToCopy.add(new Pair("ClassGarrison", "ClassGarrisonFleet"));
         }
-
-        @Override
-        public int hashCode() {
-            int hash = 73 * 3 + Objects.hashCode(this.from);
-            return 73 * hash + Objects.hashCode(this.to);
+        public SimulationDescriptor get(String name, HashMap<String, SimulationDescriptor> data) {
+            var result = data.get(name);
+            if (result != null) {
+                result = result.clone();
+                System.out.println(result);
+                for (Pair pair : keysToCopy) {
+                    if (name.equals(pair.to)) {
+                        result.addMissingProperties(get(pair.from, data));
+                    }
+                }
+            }
+            return result;
         }
+        private class Pair {
+            public final String from;
+            public final String to;
 
-        @Override
-        public boolean equals(Object obj) {
-            if (this == obj) {
-                return true;
+            public Pair(String from, String to) {
+                this.from = from;
+                this.to = to;
             }
-            if (obj == null || getClass() != obj.getClass()) {
-                return false;
+
+            @Override
+            public int hashCode() {
+                int hash = 73 * 3 + Objects.hashCode(this.from);
+                return 73 * hash + Objects.hashCode(this.to);
             }
-            final Pair other = (Pair) obj;
-            return Objects.equals(this.from, other.from) && Objects.equals(this.to, other.to);
+
+            @Override
+            public boolean equals(Object obj) {
+                if (this == obj) {
+                    return true;
+                }
+                if (obj == null || getClass() != obj.getClass()) {
+                    return false;
+                }
+                final Pair other = (Pair) obj;
+                return Objects.equals(this.from, other.from) && Objects.equals(this.to, other.to);
+            }
         }
     }
 }
