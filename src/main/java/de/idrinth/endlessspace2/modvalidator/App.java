@@ -10,7 +10,11 @@ public class App extends Application {
     private static Stage stage;
     @Override
     public void start(Stage stage) throws IOException {
-        stage.setTitle("Endless Space 2 Mod Validator");
+        stage.setTitle(
+            "Endless Space 2 Mod Validator | v" + new String(
+                getClass().getResourceAsStream("version").readAllBytes()
+            )
+        );
         App.stage = stage;
         toScene("initial");
     }

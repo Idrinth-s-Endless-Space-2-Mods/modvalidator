@@ -22,10 +22,21 @@ class SimpleXMLIterator {
     
     public void run(File source, TextOutputLogger logger, SimulationDescriptors simulationDescriptors)
     {
+        System.out.println("25");
+        System.out.println(source);
+        System.out.println(source.listFiles());
+        var files = source.listFiles();
+        if (null == files) {
+            logger.error(source, "Failed to get children");
+            return;
+        }
         for(File file : source.listFiles()) {
+        System.out.println("27");
             if (file.isDirectory()) {
+        System.out.println("29");
                 run(file, logger, simulationDescriptors);
             } else if (file.isFile() && file.getName().endsWith(".xml")) {
+        System.out.println("32");
                 logger.debug(file, "starting");
                 var schema = parseXMLForSchema(file, logger);
                 if (null != schema) {
