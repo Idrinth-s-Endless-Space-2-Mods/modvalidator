@@ -2,25 +2,25 @@ package de.idrinth.endlessspace2.modvalidator;
 
 import java.io.File;
 
-class Data {
+class DataTransferHelper {
     private static XMLIterator iterator;
     private static SimulationDescriptors rootList;
     private static File workshopDir;
     private static File gameDir;
 
     public static void setIterator(XMLIterator iterator) {
-        Data.iterator = iterator;
+        DataTransferHelper.iterator = iterator;
     }
 
     public static void setRootList(SimulationDescriptors rootList) {
-        Data.rootList = rootList;
+        DataTransferHelper.rootList = rootList;
     }
 
     public static void setWorkshopDir(File workshopDir) {
-        Data.workshopDir = workshopDir;
+        DataTransferHelper.workshopDir = workshopDir;
     }
     public static void setGameDir(File gameDir) {
-        Data.gameDir = gameDir;
+        DataTransferHelper.gameDir = gameDir;
     }
 
     public static XMLIterator iterator() {

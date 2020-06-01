@@ -16,14 +16,14 @@ public class InitialController extends ThreaddedController {
 
     @Override
     public void run() {
-        var logger = new TextOutputLogger(endlessSpaceFolder.getText(), output);
+        var logger = new TextOutputLogger(endlessSpaceFolder.getText(), new TAWrapper(output));
         logger.info("checking requirements");
         if (null == endlessSpaceFolder.getText() || endlessSpaceFolder.getText().isEmpty()) {
             logger.info("You need to provide the folder of endless space 2.");
             return;
         }
         var list = new SimulationDescriptors();
-        var iterator = new SimpleXMLIterator();
+        var iterator = new XMLIterator();
         var simFolder = new File(endlessSpaceFolder.getText()+"/Public/Simulation");
         var schemaFolder = new File(endlessSpaceFolder.getText()+"/Public/Schemas/");
         if (!simFolder.isDirectory()) {
@@ -37,10 +37,10 @@ public class InitialController extends ThreaddedController {
         logger.info("reading in game dir");
         iterator.run(simFolder, logger, list);
         logger.info("done");
-        Data.setIterator(new XMLIterator(schemaFolder.getParentFile()));
-        Data.setRootList(list);
-        Data.setGameDir(new File(endlessSpaceFolder.getText()+"/Public"));
-        Data.setWorkshopDir(new File(endlessSpaceFolder.getText()+"/../../workshop/content/392110"));
+        DataTransferHelper.setIterator(new XMLIterator(schemaFolder.getParentFile()));
+        DataTransferHelper.setRootList(list);
+        DataTransferHelper.setGameDir(new File(endlessSpaceFolder.getText()+"/Public"));
+        DataTransferHelper.setWorkshopDir(new File(endlessSpaceFolder.getText()+"/../../workshop/content/392110"));
         Platform.runLater(new SwitchToPrimary(logger));
     }
     private class SwitchToPrimary implements Runnable {
@@ -53,7 +53,7 @@ public class InitialController extends ThreaddedController {
             try {
                 App.toPrimary();
             } catch (IOException ex) {
-                logger.error(Data.gameDir(), ex);
+                logger.error(DataTransferHelper.gameDir(), ex);
             }
         }
     }

@@ -1,5 +1,7 @@
 # Mod validator
 
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/ccee5c155dcb4c41af5a7444e5d378bf)](https://www.codacy.com/gh/Idrinth-s-Endless-Space-2-Mods/modvalidator?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Idrinth-s-Endless-Space-2-Mods/modvalidator&amp;utm_campaign=Badge_Grade)
+
 Download the jar of the latest release to use.
 
 ## Validations

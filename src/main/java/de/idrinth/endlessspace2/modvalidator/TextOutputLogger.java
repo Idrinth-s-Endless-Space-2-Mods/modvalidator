@@ -5,19 +5,17 @@ import java.io.IOException;
 import java.lang.System.Logger;
 import java.util.Enumeration;
 import java.util.ResourceBundle;
-import javafx.application.Platform;
-import javafx.scene.control.TextArea;
 
 class TextOutputLogger implements Logger {
 
     private final String root;
-    private final TextArea output;
+    private final TAWrapper output;
     private final String FORMAT = "[%s] %s: %s\n";
 
-    public TextOutputLogger(File root, TextArea output) {
+    public TextOutputLogger(File root, TAWrapper output) {
         this(path(root), output);
     }
-    public TextOutputLogger(String root, TextArea output) {
+    public TextOutputLogger(String root, TAWrapper output) {
         this.root = root == null ? "" :  root;
         output.clear();
         this.debug(root, "Root set");
@@ -43,11 +41,11 @@ class TextOutputLogger implements Logger {
         }
     }
     private void error(String context, String msg) {
-        log(Level.ERROR, new RB(), "ERROR", context, msg);
+        log(Level.ERROR, new RB(), "ERROR", context.replace(root, ""), msg);
     }
 
     public void warn(File context, String msg) {
-        log(Level.WARNING, new RB(), "WARNING", path(context), msg);
+        log(Level.WARNING, new RB(), "WARNING", path(context).replace(root, ""), msg);
     }
 
     public void error(File context, String msg) {
@@ -72,6 +70,8 @@ class TextOutputLogger implements Logger {
 
     @Override
     public void log(Level level, ResourceBundle bundle, String msg, Throwable thrown) {
+        log(level, bundle, FORMAT, "", msg);
+        log(level, bundle, FORMAT, "", thrown.getMessage());
     }
 
     @Override
@@ -81,23 +81,7 @@ class TextOutputLogger implements Logger {
         if (level == Level.DEBUG) {
             return;
         }
-        Platform.runLater(new LogEntry(out, output));
-    }
-
-    private class LogEntry implements Runnable {
-
-        private final String msg;
-        private final TextArea output;
-
-        public LogEntry(String msg, TextArea output) {
-            this.msg = msg;
-            this.output = output;
-        }
-
-        @Override
-        public void run() {
-            output.appendText(msg);
-        }
+        output.append(out);
     }
 
     private class RB extends ResourceBundle {

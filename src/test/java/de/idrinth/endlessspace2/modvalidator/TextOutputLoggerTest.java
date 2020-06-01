@@ -3,7 +3,6 @@ package de.idrinth.endlessspace2.modvalidator;
 import java.io.File;
 import java.io.IOException;
 import java.lang.System.Logger.Level;
-import javafx.scene.control.TextArea;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -17,14 +16,16 @@ import org.mockito.junit.jupiter.MockitoExtension;
 @ExtendWith(MockitoExtension.class)
 public class TextOutputLoggerTest {
     @Mock
-    TextArea out;
+    public TAWrapper out;
     @Mock
-    File file;
+    public File file;
     @Test
     public void testGetName() {
         System.out.println("getName");
         var instance = new TextOutputLogger("ex", out);
         assertEquals("", instance.getName());
+        verify(out, times(1)).clear();
+        verifyNoMoreInteractions(out);
     }
 
     @Test
@@ -38,6 +39,8 @@ public class TextOutputLoggerTest {
         assertEquals(true, instance.isLoggable(Level.OFF));
         assertEquals(true, instance.isLoggable(Level.TRACE));
         assertEquals(true, instance.isLoggable(Level.WARNING));
+        verify(out, times(1)).clear();
+        verifyNoMoreInteractions(out);
     }
 
     @Test
@@ -46,28 +49,31 @@ public class TextOutputLoggerTest {
         TextOutputLogger instance = new TextOutputLogger("ex", out);
         when(file.getCanonicalPath()).thenReturn("ex/am/ple.xml");
         instance.warn(file, "Message");
-        verify(out, times(1)).appendText("[WARNING]/am/ple.xml: Message");
+        verify(out, times(1)).clear();
+        verify(out, times(1)).append("[WARNING] /am/ple.xml: Message\n");
         verifyNoMoreInteractions(out);
     }
 
     @Test
-    public void testError_File_String() throws IOException {
+    public void testErrorCalledWithFileAndString() throws IOException {
         System.out.println("error");
         TextOutputLogger instance = new TextOutputLogger("ex", out);
         when(file.getCanonicalPath()).thenReturn("ex/am/ple.xml");
-        instance.warn(file, "Message");
-        verify(out, times(1)).appendText("[ERROR]/am/ple.xml: Message");
+        instance.error(file, "Message");
+        verify(out, times(1)).clear();
+        verify(out, times(1)).append("[ERROR] /am/ple.xml: Message\n");
         verifyNoMoreInteractions(out);
     }
 
     @Test
-    public void testError_File_Throwable() throws IOException {
+    public void testErrorCalledWithFileAndThrowable() throws IOException {
         System.out.println("error");
         TextOutputLogger instance = new TextOutputLogger("ex", out);
         var thrown = new Exception("Exception");
         when(file.getCanonicalPath()).thenReturn("ex/am/ple.xml");
         instance.error(file, thrown);
-        verify(out, times(1)).appendText("[ERROR]/am/ple.xml: Exception");
+        verify(out, times(1)).clear();
+        verify(out, times(1)).append("[ERROR] /am/ple.xml: Exception\n");
         verifyNoMoreInteractions(out);
     }
 
@@ -77,6 +83,7 @@ public class TextOutputLoggerTest {
         TextOutputLogger instance = new TextOutputLogger("ex", out);
         when(file.getCanonicalPath()).thenReturn("ex/am/ple.xml");
         instance.debug(file, "Test");
+        verify(out, times(1)).clear();
         verifyNoMoreInteractions(out);
     }
 
@@ -84,9 +91,9 @@ public class TextOutputLoggerTest {
     public void testInfo() throws IOException {
         System.out.println("info");
         TextOutputLogger instance = new TextOutputLogger("ex", out);
-        when(file.getCanonicalPath()).thenReturn("ex/am/ple.xml");
         instance.info("INFO");
-        verify(out, times(1)).appendText("[INFO]/am/ple.xml: INFO");
+        verify(out, times(1)).clear();
+        verify(out, times(1)).append("[INFO] PROCESS: INFO\n");
         verifyNoMoreInteractions(out);
     }
 }

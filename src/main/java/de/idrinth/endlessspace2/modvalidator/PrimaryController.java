@@ -28,25 +28,25 @@ public class PrimaryController extends ThreaddedController implements Initializa
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        iterator = Data.iterator();
-        rootList = Data.rootList();
+        iterator = DataTransferHelper.iterator();
+        rootList = DataTransferHelper.rootList();
         var files = new Observed<File>();
         var folder = new File(System.getProperty("user.home") + "/Documents/Endless space 2/Community");
         if (folder.isDirectory()) {
             files.addAll(Arrays.asList(folder.listFiles(new FolderFilter())));
         }
-        var workshop = Data.workshopDir();
+        var workshop = DataTransferHelper.workshopDir();
         if (workshop.isDirectory()) {
             files.addAll(Arrays.asList(workshop.listFiles(new FolderFilter())));
         }
-        files.add(Data.gameDir());
+        files.add(DataTransferHelper.gameDir());
         modfolder.setConverter(new FileConverter());
         modfolder.setItems(files);
     }
 
     @Override
     public void run() {
-        var logger = new TextOutputLogger(modfolder.getValue(), output);
+        var logger = new TextOutputLogger(modfolder.getValue(), new TAWrapper(output));
         if (null == modfolder.getValue()) {
             logger.info("You need to choose a mod to check.");
             return;
