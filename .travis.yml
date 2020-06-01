@@ -4,5 +4,5 @@ branches:
   only:
   - master
 script: mvn clean install
-after_success: bash <(curl -Ls https://coverage.codacy.com/get.sh) report -l Java -r ./target/site/jacoco/jacoco.xml
-after_failure: bash <(curl -Ls https://coverage.codacy.com/get.sh) report -l Java -r ./target/site/jacoco/jacoco.xml
+after_success: bash <(curl -Ls https://coverage.codacy.com/get.sh) report -l Java -r ./target/jacoco/jacoco.xml
+after_failure: bash <(curl -Ls https://coverage.codacy.com/get.sh) report -l Java -r ./target/jacoco/jacoco.xml
