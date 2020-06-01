@@ -48,9 +48,9 @@ class SimulationDescriptors
     {
         var result = new SimulationDescriptors();
         result.data.putAll(data);
-        for (var sd : result.values()) {
+        result.values().forEach((sd) -> {
             sd.setMap(result);
-        }
+        });
         return result;
     }
     private class SimulationDescriptorAdjuster {
