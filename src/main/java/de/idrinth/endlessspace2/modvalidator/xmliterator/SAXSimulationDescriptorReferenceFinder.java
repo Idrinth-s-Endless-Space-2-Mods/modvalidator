@@ -30,11 +30,12 @@ public class SAXSimulationDescriptorReferenceFinder extends SAXFinder {
     public void startElement(String namespaceURI, String localName, String qName, Attributes atts) throws SAXException {
         if (schema == null) {
             schema = byLocalName(atts, "noNamespaceSchemaLocation");
-            for (var reference : references) {
-                if (schema.endsWith(reference.schema)) {
+            references
+                .stream()
+                .filter((reference) -> (schema.endsWith(reference.schema)))
+                .forEachOrdered((reference) -> {
                     current.add(reference);
-                }
-            }
+                });
             return;
         }
         if (tag.isEmpty() && null != byLocalName(atts, "Name")) {

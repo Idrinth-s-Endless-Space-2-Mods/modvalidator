@@ -25,6 +25,7 @@ public class ValidatingXMLIterator extends BaseXMLIterator {
     protected void handleFile(File file, File source, TextOutputLogger logger, SimulationDescriptors simulationDescriptors, ExternalReferences externals)
     {
         var finder = new SAXSchemaFinder();
+        System.out.println("-1>");
         parseXML(
             file,
             logger,
@@ -32,10 +33,11 @@ public class ValidatingXMLIterator extends BaseXMLIterator {
             new SAXSimulationDescriptorReferenceFinder(references, externals, file),
             new SAXSimulationDescriptorFinder(simulationDescriptors, file, true)
         );
+        System.out.println("-2>");
         validateXMLSchema(finder.value(), file, logger);
+        System.out.println("-3>");
     }
     private void validateXMLSchema(String xsdPath, File xmlPath, TextOutputLogger logger){
-        System.out.println(xsdPath);
         if (null == xsdPath || xsdPath.isEmpty()) {
             logger.error(xmlPath, "schema can't be found");
             return;
