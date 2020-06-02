@@ -24,3 +24,7 @@ Some types do not provide a way to find a parent type, even with that parent obv
 -   ClassColonizedStarSystem is a parent of ClassExploitedStarSystem
 -   ClassPlanet is a parent of ClassColonizedPlanet
 -   ClassGarrison is a parent of ClassGarrisonFleet
+
+### Reference Validaton
+
+Based on manually added schema:tag:attribute external references to SimulationDescriptors are checked. This finds misstyped names as well as forgotten SimulationDescriptors.
