@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>de.idrinth.endlessspace2</groupId>
     <artifactId>modvalidator</artifactId>
-    <version>1.1.1</version>
+    <version>1.2.0</version>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>14</maven.compiler.source>
@@ -31,7 +31,7 @@
             <version>${javafx.version}</version>
         </dependency>
         <!-- adding all the platform libs only adds a couple more MB -->
-        <!--<dependency>
+        <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-graphics</artifactId>
             <version>${javafx.version}</version>
@@ -48,7 +48,7 @@
             <artifactId>javafx-graphics</artifactId>
             <version>${javafx.version}</version>
             <classifier>linux</classifier>
-        </dependency>-->
+        </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>

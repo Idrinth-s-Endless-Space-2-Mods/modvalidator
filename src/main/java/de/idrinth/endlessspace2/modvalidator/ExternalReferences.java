@@ -29,6 +29,23 @@ public class ExternalReferences {
             }
         }
     }
+
+    @Override
+    public int hashCode() {
+        return 79 * 7 + Objects.hashCode(this.externals);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        final ExternalReferences other = (ExternalReferences) obj;
+        return Objects.equals(this.externals, other.externals);
+    }
     private class ExternalReferenceId {
         private final String name;
         private final String type;

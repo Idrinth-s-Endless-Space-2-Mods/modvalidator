@@ -2,6 +2,8 @@ package de.idrinth.endlessspace2.modvalidator;
 
 import java.io.File;
 import java.util.HashSet;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
@@ -32,5 +34,22 @@ public class ExternalReferencesTest {
         verifyNoMoreInteractions(logger);
         verify(list).has("3");
         verifyNoMoreInteractions(list);
+    }
+    @Test
+    public void testEquals() {
+        ExternalReferences instance = new ExternalReferences();
+        assertNotEquals(null, instance);
+        assertEquals(new ExternalReferences(), instance);
+        var set = new HashSet<ExternalReference>();
+        set.add(new ExternalReference(new File("."), "k", "q"));
+        instance.add("name", "type", set);
+        assertNotEquals(new ExternalReferences(), instance);
+        instance.add("name", "type", new HashSet<>());
+        assertEquals(new ExternalReferences(), instance);
+    }
+    @Test
+    public void testHashCode() {
+        ExternalReferences instance = new ExternalReferences();
+        assertEquals(553, instance.hashCode());
     }
 }

@@ -25,7 +25,6 @@ public class ValidatingXMLIterator extends BaseXMLIterator {
     protected void handleFile(File file, File source, TextOutputLogger logger, SimulationDescriptors simulationDescriptors, ExternalReferences externals)
     {
         var finder = new SAXSchemaFinder();
-        System.out.println("-1>");
         parseXML(
             file,
             logger,
@@ -33,28 +32,30 @@ public class ValidatingXMLIterator extends BaseXMLIterator {
             new SAXSimulationDescriptorReferenceFinder(references, externals, file),
             new SAXSimulationDescriptorFinder(simulationDescriptors, file, true)
         );
-        System.out.println("-2>");
         validateXMLSchema(finder.value(), file, logger);
-        System.out.println("-3>");
     }
     private void validateXMLSchema(String xsdPath, File xmlPath, TextOutputLogger logger){
         if (null == xsdPath || xsdPath.isEmpty()) {
             logger.error(xmlPath, "schema can't be found");
             return;
         }
-        if (!xsdPath.startsWith("Schemas")) {
-            logger.warn(xmlPath, "schema starts with a none-existing path: "+xsdPath);
-            var pos = xsdPath.indexOf("Schemas");
-            xsdPath = xsdPath.substring(pos > 0 ? pos : 0);
-        }
-        logger.debug(xmlPath, "schema "+xsdPath);
+        var xsd = cleanPath(xsdPath, xmlPath, logger);
+        logger.debug(xmlPath, "schema "+xsd);
         try {
             SchemaFactory factory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
-            Schema schema = factory.newSchema(new StreamSource(root + "/" + xsdPath));
+            Schema schema = factory.newSchema(new StreamSource(root + "/" + xsd));
             Validator validator = schema.newValidator();
             validator.validate(new StreamSource(xmlPath));
         } catch (IOException | SAXException ex) {
             logger.error(xmlPath, ex);
         }
+    }
+    private String cleanPath(String xsdPath, File xmlPath, TextOutputLogger logger) {
+        if (xsdPath.startsWith("Schemas")) {
+            return xsdPath;
+        }
+        logger.warn(xmlPath, "schema starts with a none-existing path: "+xsdPath);
+        var pos = xsdPath.indexOf("Schemas");
+        return xsdPath.substring(pos > 0 ? pos : 0);
     }
 }

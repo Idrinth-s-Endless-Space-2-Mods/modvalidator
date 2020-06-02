@@ -1,14 +1,12 @@
 package de.idrinth.endlessspace2.modvalidator.runner;
 
 import de.idrinth.endlessspace2.modvalidator.DataTransferHelper;
-import de.idrinth.endlessspace2.modvalidator.SimulationDescriptorReference;
 import de.idrinth.endlessspace2.modvalidator.SimulationDescriptors;
 import de.idrinth.endlessspace2.modvalidator.SimulationReferenceListHelper;
 import de.idrinth.endlessspace2.modvalidator.TextOutputLogger;
 import de.idrinth.endlessspace2.modvalidator.xmliterator.InitialLoadXMLIterator;
 import de.idrinth.endlessspace2.modvalidator.xmliterator.ValidatingXMLIterator;
 import java.io.File;
-import java.util.HashSet;
 
 public class Initial implements Runnable {
     private final String endlessSpaceFolder;
