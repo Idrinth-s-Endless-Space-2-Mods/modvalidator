@@ -7,10 +7,14 @@ import java.util.Set;
 public class ExternalReferences {
     private final HashMap<ExternalReferenceId, Set<ExternalReference>> externals = new HashMap<>();
     public void add(String name, String type, Set<ExternalReference> references) {
-        externals.put(
-            new ExternalReferenceId(name, type),
-            references
-        );
+        var key = new ExternalReferenceId(name, type);
+        if (references.isEmpty()) {
+            if (externals.containsKey(key)) {
+                externals.remove(key);
+            }
+            return;
+        }
+        externals.put(key, references);
     }
     public void check(TextOutputLogger logger, SimulationDescriptors list) {
         for (var id : externals.keySet()) {

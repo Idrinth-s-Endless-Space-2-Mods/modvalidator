@@ -38,6 +38,7 @@ public class ValidationTest {
         instance.run();
         verify(logger).info("xsd validation");
         verify(logger).info("logic validation");
+        verify(logger).info("reference validation");
         verify(logger).info("done");
         verifyNoMoreInteractions(logger);
         verify(iterator).run(eq(modfolder), eq(logger), eq(rootList), isA(ExternalReferences.class));

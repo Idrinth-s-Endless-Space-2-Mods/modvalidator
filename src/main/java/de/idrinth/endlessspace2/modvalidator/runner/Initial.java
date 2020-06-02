@@ -3,6 +3,7 @@ package de.idrinth.endlessspace2.modvalidator.runner;
 import de.idrinth.endlessspace2.modvalidator.DataTransferHelper;
 import de.idrinth.endlessspace2.modvalidator.SimulationDescriptorReference;
 import de.idrinth.endlessspace2.modvalidator.SimulationDescriptors;
+import de.idrinth.endlessspace2.modvalidator.SimulationReferenceListHelper;
 import de.idrinth.endlessspace2.modvalidator.TextOutputLogger;
 import de.idrinth.endlessspace2.modvalidator.xmliterator.InitialLoadXMLIterator;
 import de.idrinth.endlessspace2.modvalidator.xmliterator.ValidatingXMLIterator;
@@ -28,11 +29,11 @@ public class Initial implements Runnable {
         var list = new SimulationDescriptors();
         var iterator = new InitialLoadXMLIterator();
         var simFolder = new File(endlessSpaceFolder+"/Public/Simulation");
-        var schemaFolder = new File(endlessSpaceFolder+"/Public/Schemas/");
         if (!simFolder.isDirectory()) {
             logger.info("Can't find Simulation folder at the place you pointed to.");
             return;
         }
+        var schemaFolder = new File(endlessSpaceFolder+"/Public/Schemas/");
         if (!schemaFolder.isDirectory()) {
             logger.info("Can't find Schema folder at the place you pointed to.");
             return;
@@ -40,9 +41,8 @@ public class Initial implements Runnable {
         logger.info("reading in game dir");
         iterator.run(simFolder, logger, list);
         logger.info("done");
-        HashSet<SimulationDescriptorReference> references = null;
         DataTransferHelper.create(
-            new ValidatingXMLIterator(schemaFolder.getParentFile(), references),
+            new ValidatingXMLIterator(schemaFolder.getParentFile(), SimulationReferenceListHelper.provide()),
             list,
             new File(endlessSpaceFolder+"/../../workshop/content/392110"),
             new File(endlessSpaceFolder+"/Public")

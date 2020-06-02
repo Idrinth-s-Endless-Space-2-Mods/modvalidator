@@ -31,6 +31,7 @@ public class Validation implements Runnable {
         list.values().forEach((sd) -> {
             sd.check(logger);
         });
+        logger.info("reference validation");
         externals.check(logger, list);
         logger.info("done");
     }

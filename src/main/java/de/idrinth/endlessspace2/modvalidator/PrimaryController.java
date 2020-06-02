@@ -83,10 +83,10 @@ public class PrimaryController extends ThreaddedController implements Initializa
                 full = file.getCanonicalPath();
                 if (full.contains("workshop")) {
                     path = "workshop://"+full.substring(full.lastIndexOf("workshop")+24);
-                    name = file.listFiles(new XMLNotRegistry())[0].getName().replace(".xml", "");
+                    name = getFirstFileOfDir(file);
                 } else if(full.contains("Community")) {
                     path = "local://"+full.substring(full.lastIndexOf("Community")+10);
-                    name = file.listFiles(new XMLNotRegistry())[0].getName().replace(".xml", "");
+                    name = getFirstFileOfDir(file);
                 } else if(full.endsWith("Public")) {
                     path = "game://Endless Space 2";
                     name = "Base";
@@ -94,6 +94,17 @@ public class PrimaryController extends ThreaddedController implements Initializa
                     throw new IOException(full+" can't be recognised as a folder");
                 }
                 this.file = file;
+            }
+            private String getFirstFileOfDir(File dir) {
+                var files = dir.listFiles(new XMLNotRegistry());
+                if (files == null || files.length==0) {
+                    return "";
+                }
+                var first = files[0];
+                if (first == null) {
+                    return "";
+                }
+                return first.getName().replace(".xml", "");
             }
             public String id() {
                 return String.format("%s%s%s", path, "@", name);

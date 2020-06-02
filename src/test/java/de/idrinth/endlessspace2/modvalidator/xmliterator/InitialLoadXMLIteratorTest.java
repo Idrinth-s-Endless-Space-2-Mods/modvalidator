@@ -26,7 +26,6 @@ public class InitialLoadXMLIteratorTest {
         var file = new File(ROOT + "/xml-case-1/example.xml");
         instance.run(folder, logger, simulationDescriptors);
         verify(logger, times(1)).debug(file, "starting");
-        verify(logger, times(1)).debug(file, "schema example.xsd");
         verify(logger, times(1)).debug(file, "done");
         verifyNoMoreInteractions(logger);
     }
@@ -39,10 +38,8 @@ public class InitialLoadXMLIteratorTest {
         var file2 = new File(ROOT + "/xml-case-2/subfolder/example.xml");
         instance.run(folder, logger, simulationDescriptors);
         verify(logger, times(1)).debug(file1, "starting");
-        verify(logger, times(1)).debug(file1, "schema example.xsd");
         verify(logger, times(1)).debug(file1, "done");
         verify(logger, times(1)).debug(file2, "starting");
-        verify(logger, times(1)).debug(file2, "schema /example.xsd");
         verify(logger, times(1)).debug(file2, "done");
         verifyNoMoreInteractions(logger);
     }
@@ -54,7 +51,6 @@ public class InitialLoadXMLIteratorTest {
         var file = new File(ROOT + "/xml-case-3/SimulationDescriptors[Idrinth][Garrison].xml");
         instance.run(folder, logger, simulationDescriptors);
         verify(logger, times(1)).debug(file, "starting");
-        verify(logger, times(1)).debug(file, "schema Schemas/Amplitude.Unity.Simulation.SimulationDescriptor.xsd");
         verify(logger, times(1)).debug(file, "done");
         verifyNoMoreInteractions(logger);
     }
@@ -67,7 +63,6 @@ public class InitialLoadXMLIteratorTest {
         var file = new File(ROOT + "/xml-case-1/example.xml");
         instance.run(folder, logger, simulationDescriptors);
         verify(logger, times(1)).debug(file, "starting");
-        verify(logger, times(1)).debug(file, "schema example.xsd");
         verify(logger, times(1)).debug(file, "done");
         verifyNoMoreInteractions(logger);
     }
@@ -80,10 +75,8 @@ public class InitialLoadXMLIteratorTest {
         var file2 = new File(ROOT + "/xml-case-2/subfolder/example.xml");
         instance.run(folder, logger, simulationDescriptors);
         verify(logger, times(1)).debug(file1, "starting");
-        verify(logger, times(1)).debug(file1, "schema example.xsd");
         verify(logger, times(1)).debug(file1, "done");
         verify(logger, times(1)).debug(file2, "starting");
-        verify(logger, times(1)).debug(file2, "schema /example.xsd");
         verify(logger, times(1)).debug(file2, "done");
         verifyNoMoreInteractions(logger);
     }

@@ -8,41 +8,21 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParserFactory;
+import org.xml.sax.ContentHandler;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
 abstract class BaseXMLIterator {
-    private final boolean validate;
-    public BaseXMLIterator(boolean validate) {
-        this.validate = validate;
-    }
-    protected void parseXMLForSimluationDescriptors(File xmlPath, TextOutputLogger logger, SimulationDescriptors simulationDescriptors) {
+    protected void parseXML(File xmlPath, TextOutputLogger logger, ContentHandler ...handlers) {
         try(var input = new FileInputStream(xmlPath)) {
             var spf = SAXParserFactory.newInstance();
             spf.setNamespaceAware(true);
-            var handler = new SAXSimulationDescriptorFinder(simulationDescriptors, xmlPath, validate);
-            var saxParser = spf.newSAXParser();
-            var xmlReader = saxParser.getXMLReader();
-            xmlReader.setContentHandler(handler);
+            var xmlReader = spf.newSAXParser().getXMLReader();
+            xmlReader.setContentHandler(new MultiEventHandler(handlers));
             xmlReader.parse(new InputSource(input));
         } catch (IOException|ParserConfigurationException|SAXException ex) {
             logger.error(xmlPath, ex);
         }
-    }
-    protected String parseXMLForSchema(File xmlPath, TextOutputLogger logger) {
-        try(var input = new FileInputStream(xmlPath)) {
-            var spf = SAXParserFactory.newInstance();
-            spf.setNamespaceAware(true);
-            var schema = new SAXSchemaFinder();
-            var saxParser = spf.newSAXParser();
-            var xmlReader = saxParser.getXMLReader();
-            xmlReader.setContentHandler(schema);
-            xmlReader.parse(new InputSource(input));
-            return schema.value();
-        } catch (IOException|ParserConfigurationException|SAXException ex) {
-            logger.error(xmlPath, ex);
-        }
-        return null;
     }
     protected abstract void handleFile(File xml, File source, TextOutputLogger logger, SimulationDescriptors simulationDescriptors, ExternalReferences externals);
     public void run(File source, TextOutputLogger logger, SimulationDescriptors simulationDescriptors, ExternalReferences externals)
