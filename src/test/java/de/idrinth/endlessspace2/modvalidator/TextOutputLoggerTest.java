@@ -96,4 +96,14 @@ public class TextOutputLoggerTest {
         verify(out, times(1)).append("[INFO] PROCESS: INFO\n");
         verifyNoMoreInteractions(out);
     }
+
+    @Test
+    public void testWarnWithBrokenFile() throws IOException {
+        System.out.println("info");
+        TextOutputLogger instance = new TextOutputLogger(new File("./uuuu"), out);
+        instance.warn(new File("."), "INFO");
+        verify(out, times(1)).clear();
+        verify(out, times(1)).append("[WARNING] "+new File(".").getCanonicalPath()+": INFO\n");
+        verifyNoMoreInteractions(out);
+    }
 }
