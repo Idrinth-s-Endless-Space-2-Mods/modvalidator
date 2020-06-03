@@ -54,32 +54,6 @@ public class InitialLoadXMLIteratorTest {
         verify(logger, times(1)).debug(file, "done");
         verifyNoMoreInteractions(logger);
     }
-
-    @Test
-    public void testRunWithCase1Directory() {
-        System.out.println("run");
-        var instance = new InitialLoadXMLIterator();
-        var folder = new File(ROOT + "/xml-case-1");
-        var file = new File(ROOT + "/xml-case-1/example.xml");
-        instance.run(folder, logger, simulationDescriptors);
-        verify(logger, times(1)).debug(file, "starting");
-        verify(logger, times(1)).debug(file, "done");
-        verifyNoMoreInteractions(logger);
-    }
-    @Test
-    public void testRunWithCase2Directory() {
-        System.out.println("run");
-        var instance = new InitialLoadXMLIterator();
-        var folder = new File(ROOT + "/xml-case-2");
-        var file1 = new File(ROOT + "/xml-case-2/example.xml");
-        var file2 = new File(ROOT + "/xml-case-2/subfolder/example.xml");
-        instance.run(folder, logger, simulationDescriptors);
-        verify(logger, times(1)).debug(file1, "starting");
-        verify(logger, times(1)).debug(file1, "done");
-        verify(logger, times(1)).debug(file2, "starting");
-        verify(logger, times(1)).debug(file2, "done");
-        verifyNoMoreInteractions(logger);
-    }
     @Test
     public void testRunWithANoneDirectory() {
         System.out.println("run");

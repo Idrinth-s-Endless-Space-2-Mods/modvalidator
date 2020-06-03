@@ -73,39 +73,6 @@ public class ValidatingXMLIteratorTest {
         verify(logger, times(1)).debug(file, "done");
         verifyNoMoreInteractions(logger);
     }
-
-    @Test
-    public void testRunWithCase1Directory() {
-        System.out.println("run");
-        var folder = new File(ROOT + "/xml-case-1");
-        var instance = new ValidatingXMLIterator(folder, references);
-        var file = new File(ROOT + "/xml-case-1/example.xml");
-        instance.run(folder, logger, simulationDescriptors, externals);
-        verify(logger, times(1)).debug(file, "starting");
-        verify(logger, times(1)).debug(file, "schema Schemas/example.xsd");
-        verify(logger, times(1)).error(eq(file), isA(SAXException.class));
-        verify(logger, times(1)).debug(file, "done");
-        verifyNoMoreInteractions(logger);
-    }
-    @Test
-    public void testRunWithCase2Directory() {
-        System.out.println("run");
-        var folder = new File(ROOT + "/xml-case-2");
-        var instance = new ValidatingXMLIterator(folder, references);
-        var file1 = new File(ROOT + "/xml-case-2/example.xml");
-        var file2 = new File(ROOT + "/xml-case-2/subfolder/example.xml");
-        instance.run(folder, logger, simulationDescriptors, externals);
-        verify(logger, times(1)).debug(file1, "starting");
-        verify(logger, times(1)).debug(file1, "schema Schemas/example.xsd");
-        verify(logger, times(1)).error(eq(file1), isA(SAXException.class));
-        verify(logger, times(1)).debug(file1, "done");
-        verify(logger, times(1)).debug(file2, "starting");
-        verify(logger, times(1)).warn(file2, "schema starts with a none-existing path: Documentation/Schemas/example.xsd");
-        verify(logger, times(1)).debug(file2, "schema Schemas/example.xsd");
-        verify(logger, times(1)).error(eq(file2), isA(SAXException.class));
-        verify(logger, times(1)).debug(file2, "done");
-        verifyNoMoreInteractions(logger);
-    }
     @Test
     public void testRunWithANoneDirectory() {
         System.out.println("run");
