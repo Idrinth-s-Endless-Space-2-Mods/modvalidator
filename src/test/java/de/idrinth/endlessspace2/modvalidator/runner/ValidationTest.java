@@ -47,5 +47,14 @@ public class ValidationTest {
         verify(rootList).values();
         verifyNoMoreInteractions(rootList);
     }
-    
+    @Test
+    public void testRunWithoutModFolder() {
+        System.out.println("run");
+        Validation instance = new Validation(null, iterator, rootList, logger);
+        instance.run();
+        verify(logger).info("You need to choose a mod to check.");
+        verifyNoMoreInteractions(logger);
+        verifyNoMoreInteractions(iterator);
+        verifyNoMoreInteractions(rootList);
+    }
 }

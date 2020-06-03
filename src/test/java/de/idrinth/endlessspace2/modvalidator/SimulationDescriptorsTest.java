@@ -1,5 +1,6 @@
 package de.idrinth.endlessspace2.modvalidator;
 
+import java.io.File;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -62,5 +63,33 @@ public class SimulationDescriptorsTest {
         assertNotEquals(null, result);
         assertEquals(expResult, result);
         assertEquals(instance, result);
+    }
+
+    @Test
+    public void testCloneWithData() {
+        System.out.println("clone");
+        var instance = new SimulationDescriptors();
+        instance.put("example", new SimulationDescriptor("", "", new File("."), instance));
+        var result = instance.clone();
+        assertNotEquals(null, result);
+        assertEquals(1, result.values().size());
+        assertEquals(true, result.values().contains(new SimulationDescriptor("", "", new File("."), instance)));
+    }
+
+    @Test
+    public void testEquals() {
+        System.out.println("equals");
+        var instance = new SimulationDescriptors();
+        var expResult = new SimulationDescriptors();
+        assertNotEquals(null, instance);
+        assertEquals(expResult, instance);
+        assertNotEquals(instance, new SimulationDescriptor("", "", new File("."), instance));
+    }
+
+    @Test
+    public void testHashCode() {
+        System.out.println("equals");
+        var instance = new SimulationDescriptors();
+        assertEquals(413, instance.hashCode());
     }
 }
