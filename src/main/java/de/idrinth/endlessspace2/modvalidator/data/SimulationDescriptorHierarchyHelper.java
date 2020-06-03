@@ -1,0 +1,152 @@
+package de.idrinth.endlessspace2.modvalidator.data;
+
+import de.idrinth.endlessspace2.modvalidator.Pair;
+import java.util.HashSet;
+
+public class SimulationDescriptorHierarchyHelper {
+
+    public static HashSet<Pair> provide() {
+        //Stuff that is explained nowhere and still works
+        var keysToCopy = new HashSet<Pair>();
+        //Empire
+        keysToCopy.add(new Pair("ClassEmpire", "EmpireTypeMajor"));
+        keysToCopy.add(new Pair("ClassEmpire", "EmpireTypeMinor"));
+        keysToCopy.add(new Pair("ClassEmpire", "EmpireTypeLesser"));
+        keysToCopy.add(new Pair("ClassEmpire", "EmpireTypePirate"));
+        //Star System
+        keysToCopy.add(new Pair("ClassStarSystem", "ClassColonizedStarSystem"));
+        keysToCopy.add(new Pair("ClassStarSystem", "ClassLostSystem"));
+        keysToCopy.add(new Pair("ClassColonizedStarSystem", "ClassExploitedStarSystem"));
+        keysToCopy.add(new Pair("ClassPlanet", "ClassColonizedPlanet"));
+        keysToCopy.add(new Pair("ClassResourceDeposit", "ClassColonizedResourceDeposit"));
+        //Fleets
+        keysToCopy.add(new Pair("ClassGarrison", "ClassGarrisonFleet"));
+        //Population+Planet
+        keysToCopy.add(new Pair("ClassPopulation", "ClassPopulationPlanetAffinitySophons"));
+        keysToCopy.add(new Pair("ClassPopulation", "ClassPopulationPlanetAffinityTerrans"));
+        keysToCopy.add(new Pair("ClassPopulation", "ClassPopulationPlanetAffinityMezari"));
+        keysToCopy.add(new Pair("ClassPopulation", "ClassPopulationPlanetAffinitySheredyn"));
+        keysToCopy.add(new Pair("ClassPopulation", "ClassPopulationPlanetAffinityHoratio"));
+        keysToCopy.add(new Pair("ClassPopulation", "ClassPopulationPlanetAffinityTimeLords"));
+        keysToCopy.add(new Pair("ClassPopulation", "ClassPopulationPlanetAffinityCravers"));
+        keysToCopy.add(new Pair("ClassPopulation", "ClassPopulationPlanetAffinityHaroshems"));
+        keysToCopy.add(new Pair("ClassPopulation", "ClassPopulationPlanetAffinityVenetians"));
+        keysToCopy.add(new Pair("ClassPopulation", "ClassPopulationPlanetAffinityUnfallen"));
+        keysToCopy.add(new Pair("ClassPopulation", "ClassPopulationPlanetAffinityMavros"));
+        keysToCopy.add(new Pair("ClassPopulation", "ClassPopulationPlanetAffinityAmoeba"));
+        keysToCopy.add(new Pair("ClassPopulation", "ClassPopulationPlanetAffinityBenthys"));
+        keysToCopy.add(new Pair("ClassPopulation", "ClassPopulationPlanetAffinityBots"));
+        keysToCopy.add(new Pair("ClassPopulation", "ClassPopulationPlanetAffinityDeuyivans"));
+        keysToCopy.add(new Pair("ClassPopulation", "ClassPopulationPlanetAffinityPilgrims"));
+        keysToCopy.add(new Pair("ClassPopulation", "ClassPopulationPlanetAffinityZvali"));
+        keysToCopy.add(new Pair("ClassPopulation", "ClassPopulationPlanetAffinityTikanans"));
+        keysToCopy.add(new Pair("ClassPopulation", "ClassPopulationPlanetAffinityGnashasts"));
+        keysToCopy.add(new Pair("ClassPopulation", "ClassPopulationPlanetAffinityEyders"));
+        keysToCopy.add(new Pair("ClassPopulation", "ClassPopulationPlanetAffinityNiris"));
+        keysToCopy.add(new Pair("ClassPopulation", "ClassPopulationPlanetAffinityBhagabas"));
+        keysToCopy.add(new Pair("ClassPopulation", "ClassPopulationPlanetAffinityRemnant"));
+        keysToCopy.add(new Pair("ClassPopulation", "ClassPopulationPlanetAffinityPulsos"));
+        keysToCopy.add(new Pair("ClassPopulation", "ClassPopulationPlanetAffinityBasryxo"));
+        keysToCopy.add(new Pair("ClassPopulation", "ClassPopulationPlanetAffinityGuardians"));
+        keysToCopy.add(new Pair("ClassPopulation", "ClassPopulationPlanetAffinityGreenman"));
+        keysToCopy.add(new Pair("ClassPopulation", "ClassPopulationPlanetAffinityVaulters"));
+        keysToCopy.add(new Pair("ClassPopulation", "ClassPopulationPlanetAffinitySistersOfMercy"));
+        keysToCopy.add(new Pair("ClassPopulation", "ClassPopulationPlanetAffinityHisshos"));
+        keysToCopy.add(new Pair("ClassPopulation", "ClassPopulationPlanetAffinityIllo"));
+        keysToCopy.add(new Pair("ClassPopulation", "ClassPopulationPlanetAffinityUmbralChoir"));
+        keysToCopy.add(new Pair("ClassPopulation", "ClassPopulationPlanetAffinityMinorHacking"));
+        keysToCopy.add(new Pair("ClassPopulation", "ClassPopulationPlanetAffinityTemplars"));
+        keysToCopy.add(new Pair("ClassPopulation", "ClassPopulationPlanetAffinityMinorOraculars"));
+        keysToCopy.add(new Pair("ClassPopulation", "ClassPopulationPlanetAffinitySowers"));
+        keysToCopy.add(new Pair("ClassPopulation", "ClassPopulationPlanetAffinityKalTikMas"));
+        keysToCopy.add(new Pair("ClassPopulation", "ClassPopulationPlanetAffinitySefaloros"));
+        keysToCopy.add(new Pair("ClassPopulation", "ClassPopulationPlanetAffinityGalvrans"));
+        keysToCopy.add(new Pair("ClassPopulation", "ClassPopulationPlanetAffinityHarmony"));
+        keysToCopy.add(new Pair("ClassPopulation", "ClassPopulationPlanetAffinitySuperGuardians"));
+        //Population+System
+        keysToCopy.add(new Pair("ClassPopulation", "ClassPopulationStarSystemAffinitySophons"));
+        keysToCopy.add(new Pair("ClassPopulation", "ClassPopulationStarSystemAffinityTerrans"));
+        keysToCopy.add(new Pair("ClassPopulation", "ClassPopulationStarSystemAffinityMezari"));
+        keysToCopy.add(new Pair("ClassPopulation", "ClassPopulationStarSystemAffinitySheredyn"));
+        keysToCopy.add(new Pair("ClassPopulation", "ClassPopulationStarSystemAffinityHoratio"));
+        keysToCopy.add(new Pair("ClassPopulation", "ClassPopulationStarSystemAffinityTimeLords"));
+        keysToCopy.add(new Pair("ClassPopulation", "ClassPopulationStarSystemAffinityCravers"));
+        keysToCopy.add(new Pair("ClassPopulation", "ClassPopulationStarSystemAffinityHaroshems"));
+        keysToCopy.add(new Pair("ClassPopulation", "ClassPopulationStarSystemAffinityVenetians"));
+        keysToCopy.add(new Pair("ClassPopulation", "ClassPopulationStarSystemAffinityUnfallen"));
+        keysToCopy.add(new Pair("ClassPopulation", "ClassPopulationStarSystemAffinityMavros"));
+        keysToCopy.add(new Pair("ClassPopulation", "ClassPopulationStarSystemAffinityAmoeba"));
+        keysToCopy.add(new Pair("ClassPopulation", "ClassPopulationStarSystemAffinityBenthys"));
+        keysToCopy.add(new Pair("ClassPopulation", "ClassPopulationStarSystemAffinityBots"));
+        keysToCopy.add(new Pair("ClassPopulation", "ClassPopulationStarSystemAffinityDeuyivans"));
+        keysToCopy.add(new Pair("ClassPopulation", "ClassPopulationStarSystemAffinityPilgrims"));
+        keysToCopy.add(new Pair("ClassPopulation", "ClassPopulationStarSystemAffinityZvali"));
+        keysToCopy.add(new Pair("ClassPopulation", "ClassPopulationStarSystemAffinityTikanans"));
+        keysToCopy.add(new Pair("ClassPopulation", "ClassPopulationStarSystemAffinityGnashasts"));
+        keysToCopy.add(new Pair("ClassPopulation", "ClassPopulationStarSystemAffinityEyders"));
+        keysToCopy.add(new Pair("ClassPopulation", "ClassPopulationStarSystemAffinityNiris"));
+        keysToCopy.add(new Pair("ClassPopulation", "ClassPopulationStarSystemAffinityBhagabas"));
+        keysToCopy.add(new Pair("ClassPopulation", "ClassPopulationStarSystemAffinityRemnant"));
+        keysToCopy.add(new Pair("ClassPopulation", "ClassPopulationStarSystemAffinityPulsos"));
+        keysToCopy.add(new Pair("ClassPopulation", "ClassPopulationStarSystemAffinityBasryxo"));
+        keysToCopy.add(new Pair("ClassPopulation", "ClassPopulationStarSystemAffinityGuardians"));
+        keysToCopy.add(new Pair("ClassPopulation", "ClassPopulationStarSystemAffinityGreenman"));
+        keysToCopy.add(new Pair("ClassPopulation", "ClassPopulationStarSystemAffinityVaulters"));
+        keysToCopy.add(new Pair("ClassPopulation", "ClassPopulationStarSystemAffinitySistersOfMercy"));
+        keysToCopy.add(new Pair("ClassPopulation", "ClassPopulationStarSystemAffinityHisshos"));
+        keysToCopy.add(new Pair("ClassPopulation", "ClassPopulationStarSystemAffinityIllo"));
+        keysToCopy.add(new Pair("ClassPopulation", "ClassPopulationStarSystemAffinityUmbralChoir"));
+        keysToCopy.add(new Pair("ClassPopulation", "ClassPopulationStarSystemAffinityMinorHacking"));
+        keysToCopy.add(new Pair("ClassPopulation", "ClassPopulationStarSystemAffinityTemplars"));
+        keysToCopy.add(new Pair("ClassPopulation", "ClassPopulationStarSystemAffinityMinorOraculars"));
+        keysToCopy.add(new Pair("ClassPopulation", "ClassPopulationStarSystemAffinitySowers"));
+        keysToCopy.add(new Pair("ClassPopulation", "ClassPopulationStarSystemAffinityKalTikMas"));
+        keysToCopy.add(new Pair("ClassPopulation", "ClassPopulationStarSystemAffinitySefaloros"));
+        keysToCopy.add(new Pair("ClassPopulation", "ClassPopulationStarSystemAffinityGalvrans"));
+        keysToCopy.add(new Pair("ClassPopulation", "ClassPopulationStarSystemAffinityHarmony"));
+        keysToCopy.add(new Pair("ClassPopulation", "ClassPopulationStarSystemAffinitySuperGuardians"));
+        //Population+Empire
+        keysToCopy.add(new Pair("ClassPopulation", "ClassPopulationEmpireAffinitySophons"));
+        keysToCopy.add(new Pair("ClassPopulation", "ClassPopulationEmpireAffinityTerrans"));
+        keysToCopy.add(new Pair("ClassPopulation", "ClassPopulationEmpireAffinityMezari"));
+        keysToCopy.add(new Pair("ClassPopulation", "ClassPopulationEmpireAffinitySheredyn"));
+        keysToCopy.add(new Pair("ClassPopulation", "ClassPopulationEmpireAffinityHoratio"));
+        keysToCopy.add(new Pair("ClassPopulation", "ClassPopulationEmpireAffinityTimeLords"));
+        keysToCopy.add(new Pair("ClassPopulation", "ClassPopulationEmpireAffinityCravers"));
+        keysToCopy.add(new Pair("ClassPopulation", "ClassPopulationEmpireAffinityHaroshems"));
+        keysToCopy.add(new Pair("ClassPopulation", "ClassPopulationEmpireAffinityVenetians"));
+        keysToCopy.add(new Pair("ClassPopulation", "ClassPopulationEmpireAffinityUnfallen"));
+        keysToCopy.add(new Pair("ClassPopulation", "ClassPopulationEmpireAffinityMavros"));
+        keysToCopy.add(new Pair("ClassPopulation", "ClassPopulationEmpireAffinityAmoeba"));
+        keysToCopy.add(new Pair("ClassPopulation", "ClassPopulationEmpireAffinityBenthys"));
+        keysToCopy.add(new Pair("ClassPopulation", "ClassPopulationEmpireAffinityBots"));
+        keysToCopy.add(new Pair("ClassPopulation", "ClassPopulationEmpireAffinityDeuyivans"));
+        keysToCopy.add(new Pair("ClassPopulation", "ClassPopulationEmpireAffinityPilgrims"));
+        keysToCopy.add(new Pair("ClassPopulation", "ClassPopulationEmpireAffinityZvali"));
+        keysToCopy.add(new Pair("ClassPopulation", "ClassPopulationEmpireAffinityTikanans"));
+        keysToCopy.add(new Pair("ClassPopulation", "ClassPopulationEmpireAffinityGnashasts"));
+        keysToCopy.add(new Pair("ClassPopulation", "ClassPopulationEmpireAffinityEyders"));
+        keysToCopy.add(new Pair("ClassPopulation", "ClassPopulationEmpireAffinityNiris"));
+        keysToCopy.add(new Pair("ClassPopulation", "ClassPopulationEmpireAffinityBhagabas"));
+        keysToCopy.add(new Pair("ClassPopulation", "ClassPopulationEmpireAffinityRemnant"));
+        keysToCopy.add(new Pair("ClassPopulation", "ClassPopulationEmpireAffinityPulsos"));
+        keysToCopy.add(new Pair("ClassPopulation", "ClassPopulationEmpireAffinityBasryxo"));
+        keysToCopy.add(new Pair("ClassPopulation", "ClassPopulationEmpireAffinityGuardians"));
+        keysToCopy.add(new Pair("ClassPopulation", "ClassPopulationEmpireAffinityGreenman"));
+        keysToCopy.add(new Pair("ClassPopulation", "ClassPopulationEmpireAffinityVaulters"));
+        keysToCopy.add(new Pair("ClassPopulation", "ClassPopulationEmpireAffinitySistersOfMercy"));
+        keysToCopy.add(new Pair("ClassPopulation", "ClassPopulationEmpireAffinityHisshos"));
+        keysToCopy.add(new Pair("ClassPopulation", "ClassPopulationEmpireAffinityIllo"));
+        keysToCopy.add(new Pair("ClassPopulation", "ClassPopulationEmpireAffinityUmbralChoir"));
+        keysToCopy.add(new Pair("ClassPopulation", "ClassPopulationEmpireAffinityMinorHacking"));
+        keysToCopy.add(new Pair("ClassPopulation", "ClassPopulationEmpireAffinityTemplars"));
+        keysToCopy.add(new Pair("ClassPopulation", "ClassPopulationEmpireAffinityMinorOraculars"));
+        keysToCopy.add(new Pair("ClassPopulation", "ClassPopulationEmpireAffinitySowers"));
+        keysToCopy.add(new Pair("ClassPopulation", "ClassPopulationEmpireAffinityKalTikMas"));
+        keysToCopy.add(new Pair("ClassPopulation", "ClassPopulationEmpireAffinitySefaloros"));
+        keysToCopy.add(new Pair("ClassPopulation", "ClassPopulationEmpireAffinityGalvrans"));
+        keysToCopy.add(new Pair("ClassPopulation", "ClassPopulationEmpireAffinityHarmony"));
+        keysToCopy.add(new Pair("ClassPopulation", "ClassPopulationEmpireAffinitySuperGuardians"));
+        return keysToCopy;
+    }
+}

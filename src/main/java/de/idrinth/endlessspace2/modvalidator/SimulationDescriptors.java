@@ -1,5 +1,6 @@
 package de.idrinth.endlessspace2.modvalidator;
 
+import de.idrinth.endlessspace2.modvalidator.data.SimulationDescriptorHierarchyHelper;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -56,12 +57,7 @@ public class SimulationDescriptors
     private class SimulationDescriptorAdjuster {
         private final Set<Pair> keysToCopy;
         public SimulationDescriptorAdjuster() {
-            //Stuff that is explained nowhere and still works
-            keysToCopy = new HashSet<>();
-            keysToCopy.add(new Pair("ClassStarSystem", "ClassColonizedStarSystem"));
-            keysToCopy.add(new Pair("ClassColonizedStarSystem", "ClassExploitedStarSystem"));
-            keysToCopy.add(new Pair("ClassPlanet", "ClassColonizedPlanet"));
-            keysToCopy.add(new Pair("ClassGarrison", "ClassGarrisonFleet"));
+            keysToCopy = SimulationDescriptorHierarchyHelper.provide();
         }
         public SimulationDescriptor get(String name, HashMap<String, SimulationDescriptor> data) {
             var result = data.get(name);
@@ -75,33 +71,6 @@ public class SimulationDescriptors
                 }
             }
             return result;
-        }
-        private class Pair {
-            public final String from;
-            public final String to;
-
-            public Pair(String from, String to) {
-                this.from = from;
-                this.to = to;
-            }
-
-            @Override
-            public int hashCode() {
-                int hash = 73 * 3 + Objects.hashCode(this.from);
-                return 73 * hash + Objects.hashCode(this.to);
-            }
-
-            @Override
-            public boolean equals(Object obj) {
-                if (this == obj) {
-                    return true;
-                }
-                if (obj == null || getClass() != obj.getClass()) {
-                    return false;
-                }
-                final Pair other = (Pair) obj;
-                return Objects.equals(this.from, other.from) && Objects.equals(this.to, other.to);
-            }
         }
     }
 }

@@ -1,5 +1,6 @@
-package de.idrinth.endlessspace2.modvalidator;
+package de.idrinth.endlessspace2.modvalidator.data;
 
+import de.idrinth.endlessspace2.modvalidator.SimulationDescriptorReference;
 import java.util.HashSet;
 
 public class SimulationReferenceListHelper {

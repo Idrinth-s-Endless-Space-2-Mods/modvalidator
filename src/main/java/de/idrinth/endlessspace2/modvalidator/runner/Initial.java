@@ -2,7 +2,7 @@ package de.idrinth.endlessspace2.modvalidator.runner;
 
 import de.idrinth.endlessspace2.modvalidator.DataTransferHelper;
 import de.idrinth.endlessspace2.modvalidator.SimulationDescriptors;
-import de.idrinth.endlessspace2.modvalidator.SimulationReferenceListHelper;
+import de.idrinth.endlessspace2.modvalidator.data.SimulationReferenceListHelper;
 import de.idrinth.endlessspace2.modvalidator.TextOutputLogger;
 import de.idrinth.endlessspace2.modvalidator.xmliterator.InitialLoadXMLIterator;
 import de.idrinth.endlessspace2.modvalidator.xmliterator.ValidatingXMLIterator;
