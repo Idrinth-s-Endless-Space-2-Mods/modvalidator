@@ -1,5 +1,7 @@
 package de.idrinth.endlessspace2.modvalidator;
 
+import de.idrinth.endlessspace2.modvalidator.cmd.ValidatingController;
+import java.io.File;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -28,6 +30,10 @@ public class App extends Application {
     }
 
     public static void main(String[] args) {
+        if (args.length == 2) {
+            var controller = new ValidatingController(args[0], new File(args[1]));
+            System.exit(controller.isValid() ? 0 : 1);
+        }
         launch();
     }
 }

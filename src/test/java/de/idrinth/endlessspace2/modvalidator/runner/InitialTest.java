@@ -2,7 +2,7 @@ package de.idrinth.endlessspace2.modvalidator.runner;
 
 import de.idrinth.endlessspace2.modvalidator.DataTransferHelper;
 import de.idrinth.endlessspace2.modvalidator.SimulationDescriptor;
-import de.idrinth.endlessspace2.modvalidator.TextOutputLogger;
+import de.idrinth.endlessspace2.modvalidator.logger.Logger;
 import java.util.Collection;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -14,11 +14,10 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-
 @ExtendWith(MockitoExtension.class)
 public class InitialTest {
     @Mock
-    public TextOutputLogger logger;
+    public Logger logger;
     @Mock
     public Collection<SimulationDescriptor> values;
     public final static String ROOT = "src/test/resources/de/idrinth/endlessspace2/modvalidator";

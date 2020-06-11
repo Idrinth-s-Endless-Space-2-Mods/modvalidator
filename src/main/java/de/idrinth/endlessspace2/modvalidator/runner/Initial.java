@@ -3,16 +3,16 @@ package de.idrinth.endlessspace2.modvalidator.runner;
 import de.idrinth.endlessspace2.modvalidator.DataTransferHelper;
 import de.idrinth.endlessspace2.modvalidator.SimulationDescriptors;
 import de.idrinth.endlessspace2.modvalidator.data.SimulationReferenceListHelper;
-import de.idrinth.endlessspace2.modvalidator.TextOutputLogger;
+import de.idrinth.endlessspace2.modvalidator.logger.Logger;
 import de.idrinth.endlessspace2.modvalidator.xmliterator.InitialLoadXMLIterator;
 import de.idrinth.endlessspace2.modvalidator.xmliterator.ValidatingXMLIterator;
 import java.io.File;
 
 public class Initial implements Runnable {
     private final String endlessSpaceFolder;
-    private final TextOutputLogger logger;
+    private final Logger logger;
 
-    public Initial(String endlessSpaceFolder, TextOutputLogger logger) {
+    public Initial(String endlessSpaceFolder, Logger logger) {
         this.endlessSpaceFolder = endlessSpaceFolder;
         this.logger = logger;
     }

@@ -1,5 +1,6 @@
 package de.idrinth.endlessspace2.modvalidator;
 
+import de.idrinth.endlessspace2.modvalidator.logger.Logger;
 import java.io.File;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
@@ -18,7 +19,7 @@ public class SimulationDescriptorTest {
     @Mock
     public SimulationDescriptors map;
     @Mock
-    public TextOutputLogger logger;
+    public Logger logger;
     @Mock
     public File file;
     @Test

@@ -1,10 +1,9 @@
-package de.idrinth.endlessspace2.modvalidator;
+package de.idrinth.endlessspace2.modvalidator.logger;
 
+import de.idrinth.endlessspace2.modvalidator.gui.TAWrapper;
 import java.io.File;
 import java.io.IOException;
-import java.lang.System.Logger.Level;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import static org.mockito.Mockito.times;
@@ -19,29 +18,6 @@ public class TextOutputLoggerTest {
     public TAWrapper out;
     @Mock
     public File file;
-    @Test
-    public void testGetName() {
-        System.out.println("getName");
-        var instance = new TextOutputLogger("ex", out);
-        assertEquals("", instance.getName());
-        verify(out, times(1)).clear();
-        verifyNoMoreInteractions(out);
-    }
-
-    @Test
-    public void testIsLoggable() {
-        System.out.println("isLoggable");
-        var instance = new TextOutputLogger("ex", out);
-        assertEquals(true, instance.isLoggable(Level.ALL));
-        assertEquals(true, instance.isLoggable(Level.DEBUG));
-        assertEquals(true, instance.isLoggable(Level.ERROR));
-        assertEquals(true, instance.isLoggable(Level.INFO));
-        assertEquals(true, instance.isLoggable(Level.OFF));
-        assertEquals(true, instance.isLoggable(Level.TRACE));
-        assertEquals(true, instance.isLoggable(Level.WARNING));
-        verify(out, times(1)).clear();
-        verifyNoMoreInteractions(out);
-    }
 
     @Test
     public void testWarn() throws IOException {

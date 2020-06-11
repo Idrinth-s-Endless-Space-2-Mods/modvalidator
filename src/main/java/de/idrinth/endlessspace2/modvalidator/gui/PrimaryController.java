@@ -1,5 +1,8 @@
-package de.idrinth.endlessspace2.modvalidator;
+package de.idrinth.endlessspace2.modvalidator.gui;
 
+import de.idrinth.endlessspace2.modvalidator.DataTransferHelper;
+import de.idrinth.endlessspace2.modvalidator.SimulationDescriptors;
+import de.idrinth.endlessspace2.modvalidator.logger.TextOutputLogger;
 import de.idrinth.endlessspace2.modvalidator.runner.Validation;
 import de.idrinth.endlessspace2.modvalidator.xmliterator.ValidatingXMLIterator;
 import java.io.File;

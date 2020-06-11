@@ -1,7 +1,7 @@
 package de.idrinth.endlessspace2.modvalidator.xmliterator;
 
 import de.idrinth.endlessspace2.modvalidator.SimulationDescriptors;
-import de.idrinth.endlessspace2.modvalidator.TextOutputLogger;
+import de.idrinth.endlessspace2.modvalidator.logger.Logger;
 import java.io.File;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -14,7 +14,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 @ExtendWith(MockitoExtension.class)
 public class InitialLoadXMLIteratorTest {
     @Mock
-    public TextOutputLogger logger;
+    public Logger logger;
     @Mock
     public SimulationDescriptors simulationDescriptors;
     public final static String ROOT = "src/test/resources/de/idrinth/endlessspace2/modvalidator";

@@ -1,5 +1,6 @@
 package de.idrinth.endlessspace2.modvalidator;
 
+import de.idrinth.endlessspace2.modvalidator.logger.Logger;
 import java.io.File;
 import java.util.HashSet;
 import java.util.Objects;
@@ -67,7 +68,7 @@ public class SimulationDescriptor {
             properties.add(property);
         });
     }
-    public void check(TextOutputLogger logger) {
+    public void check(Logger logger) {
         if (!validate) {
             return;
         }

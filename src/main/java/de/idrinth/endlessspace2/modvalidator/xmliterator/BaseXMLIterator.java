@@ -2,7 +2,7 @@ package de.idrinth.endlessspace2.modvalidator.xmliterator;
 
 import de.idrinth.endlessspace2.modvalidator.ExternalReferences;
 import de.idrinth.endlessspace2.modvalidator.SimulationDescriptors;
-import de.idrinth.endlessspace2.modvalidator.TextOutputLogger;
+import de.idrinth.endlessspace2.modvalidator.logger.Logger;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -13,7 +13,7 @@ import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
 abstract class BaseXMLIterator {
-    protected void parseXML(File xmlPath, TextOutputLogger logger, ContentHandler ...handlers) {
+    protected void parseXML(File xmlPath, Logger logger, ContentHandler ...handlers) {
         try(var input = new FileInputStream(xmlPath)) {
             var spf = SAXParserFactory.newInstance();
             spf.setNamespaceAware(true);
@@ -24,8 +24,8 @@ abstract class BaseXMLIterator {
             logger.error(xmlPath, ex);
         }
     }
-    protected abstract void handleFile(File xml, File source, TextOutputLogger logger, SimulationDescriptors simulationDescriptors, ExternalReferences externals);
-    public void run(File source, TextOutputLogger logger, SimulationDescriptors simulationDescriptors, ExternalReferences externals)
+    protected abstract void handleFile(File xml, File source, Logger logger, SimulationDescriptors simulationDescriptors, ExternalReferences externals);
+    public void run(File source, Logger logger, SimulationDescriptors simulationDescriptors, ExternalReferences externals)
     {
         var files = source.listFiles();
         if (null == files) {

@@ -3,7 +3,7 @@ package de.idrinth.endlessspace2.modvalidator.xmliterator;
 import de.idrinth.endlessspace2.modvalidator.ExternalReferences;
 import de.idrinth.endlessspace2.modvalidator.SimulationDescriptorReference;
 import de.idrinth.endlessspace2.modvalidator.SimulationDescriptors;
-import de.idrinth.endlessspace2.modvalidator.TextOutputLogger;
+import de.idrinth.endlessspace2.modvalidator.logger.Logger;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashSet;
@@ -22,7 +22,7 @@ public class ValidatingXMLIterator extends BaseXMLIterator {
         this.references = references;
     }
     @Override
-    protected void handleFile(File file, File source, TextOutputLogger logger, SimulationDescriptors simulationDescriptors, ExternalReferences externals)
+    protected void handleFile(File file, File source, Logger logger, SimulationDescriptors simulationDescriptors, ExternalReferences externals)
     {
         var finder = new SAXSchemaFinder();
         parseXML(
@@ -34,7 +34,7 @@ public class ValidatingXMLIterator extends BaseXMLIterator {
         );
         validateXMLSchema(finder.value(), file, logger);
     }
-    private void validateXMLSchema(String xsdPath, File xmlPath, TextOutputLogger logger){
+    private void validateXMLSchema(String xsdPath, File xmlPath, Logger logger){
         if (null == xsdPath || xsdPath.isEmpty()) {
             logger.error(xmlPath, "schema can't be found");
             return;
@@ -50,7 +50,7 @@ public class ValidatingXMLIterator extends BaseXMLIterator {
             logger.error(xmlPath, ex);
         }
     }
-    private String cleanPath(String xsdPath, File xmlPath, TextOutputLogger logger) {
+    private String cleanPath(String xsdPath, File xmlPath, Logger logger) {
         if (xsdPath.startsWith("Schemas")) {
             return xsdPath;
         }

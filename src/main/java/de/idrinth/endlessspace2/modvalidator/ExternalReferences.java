@@ -1,5 +1,6 @@
 package de.idrinth.endlessspace2.modvalidator;
 
+import de.idrinth.endlessspace2.modvalidator.logger.Logger;
 import java.util.HashMap;
 import java.util.Objects;
 import java.util.Set;
@@ -16,7 +17,7 @@ public class ExternalReferences {
         }
         externals.put(key, references);
     }
-    public void check(TextOutputLogger logger, SimulationDescriptors list) {
+    public void check(Logger logger, SimulationDescriptors list) {
         for (var id : externals.keySet()) {
             var references = externals.get(id);
             for (var reference : references) {

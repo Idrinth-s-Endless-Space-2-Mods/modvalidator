@@ -1,5 +1,6 @@
-package de.idrinth.endlessspace2.modvalidator;
+package de.idrinth.endlessspace2.modvalidator.gui;
 
+import de.idrinth.endlessspace2.modvalidator.logger.TextOutputLogger;
 import de.idrinth.endlessspace2.modvalidator.runner.Initial;
 import de.idrinth.endlessspace2.modvalidator.runner.SwitchToPrimary;
 import javafx.fxml.FXML;

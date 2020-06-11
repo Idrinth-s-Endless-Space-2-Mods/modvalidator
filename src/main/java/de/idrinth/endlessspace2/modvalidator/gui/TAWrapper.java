@@ -1,4 +1,4 @@
-package de.idrinth.endlessspace2.modvalidator;
+package de.idrinth.endlessspace2.modvalidator.gui;
 
 import javafx.application.Platform;
 import javafx.scene.control.TextArea;

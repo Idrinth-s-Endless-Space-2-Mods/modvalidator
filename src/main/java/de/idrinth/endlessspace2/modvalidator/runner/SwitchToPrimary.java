@@ -2,15 +2,15 @@ package de.idrinth.endlessspace2.modvalidator.runner;
 
 import de.idrinth.endlessspace2.modvalidator.App;
 import de.idrinth.endlessspace2.modvalidator.DataTransferHelper;
-import de.idrinth.endlessspace2.modvalidator.TextOutputLogger;
+import de.idrinth.endlessspace2.modvalidator.logger.Logger;
 import java.io.IOException;
 import javafx.application.Platform;
 
 public class SwitchToPrimary implements Runnable {
 
-    private final TextOutputLogger logger;
+    private final Logger logger;
 
-    public SwitchToPrimary(TextOutputLogger logger) {
+    public SwitchToPrimary(Logger logger) {
         this.logger = logger;
     }
 

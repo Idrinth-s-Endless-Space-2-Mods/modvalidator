@@ -2,7 +2,7 @@ package de.idrinth.endlessspace2.modvalidator.runner;
 
 import de.idrinth.endlessspace2.modvalidator.ExternalReferences;
 import de.idrinth.endlessspace2.modvalidator.SimulationDescriptors;
-import de.idrinth.endlessspace2.modvalidator.TextOutputLogger;
+import de.idrinth.endlessspace2.modvalidator.logger.Logger;
 import de.idrinth.endlessspace2.modvalidator.xmliterator.ValidatingXMLIterator;
 import java.io.File;
 
@@ -10,8 +10,8 @@ public class Validation implements Runnable {
     private final File modfolder;
     private final ValidatingXMLIterator iterator;
     private final SimulationDescriptors rootList;
-    private final TextOutputLogger logger;
-    public Validation(File modfolder, ValidatingXMLIterator iterator, SimulationDescriptors rootList, TextOutputLogger logger) {
+    private final Logger logger;
+    public Validation(File modfolder, ValidatingXMLIterator iterator, SimulationDescriptors rootList, Logger logger) {
         this.modfolder = modfolder;
         this.iterator = iterator;
         this.rootList = rootList;

@@ -1,5 +1,6 @@
 package de.idrinth.endlessspace2.modvalidator;
 
+import de.idrinth.endlessspace2.modvalidator.logger.Logger;
 import java.io.File;
 import java.util.HashSet;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -17,7 +18,7 @@ public class ExternalReferencesTest {
     @Mock
     public SimulationDescriptors list;
     @Mock
-    public TextOutputLogger logger;
+    public Logger logger;
     @Test
     public void testCheck() {
         System.out.println("check");

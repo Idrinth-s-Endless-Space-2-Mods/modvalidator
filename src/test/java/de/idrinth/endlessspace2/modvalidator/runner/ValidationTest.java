@@ -3,7 +3,7 @@ package de.idrinth.endlessspace2.modvalidator.runner;
 import de.idrinth.endlessspace2.modvalidator.ExternalReferences;
 import de.idrinth.endlessspace2.modvalidator.SimulationDescriptor;
 import de.idrinth.endlessspace2.modvalidator.SimulationDescriptors;
-import de.idrinth.endlessspace2.modvalidator.TextOutputLogger;
+import de.idrinth.endlessspace2.modvalidator.logger.Logger;
 import de.idrinth.endlessspace2.modvalidator.xmliterator.ValidatingXMLIterator;
 import java.io.File;
 import java.util.Collection;
@@ -26,7 +26,7 @@ public class ValidationTest {
     @Mock
     public SimulationDescriptors rootList;
     @Mock
-    public TextOutputLogger logger;
+    public Logger logger;
     @Mock
     public Collection<SimulationDescriptor> values;
     @Test

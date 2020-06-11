@@ -3,7 +3,7 @@ package de.idrinth.endlessspace2.modvalidator.xmliterator;
 import de.idrinth.endlessspace2.modvalidator.ExternalReferences;
 import de.idrinth.endlessspace2.modvalidator.SimulationDescriptorReference;
 import de.idrinth.endlessspace2.modvalidator.SimulationDescriptors;
-import de.idrinth.endlessspace2.modvalidator.TextOutputLogger;
+import de.idrinth.endlessspace2.modvalidator.logger.Logger;
 import java.io.File;
 import java.util.HashSet;
 import org.junit.jupiter.api.Test;
@@ -20,7 +20,7 @@ import org.xml.sax.SAXException;
 @ExtendWith(MockitoExtension.class)
 public class ValidatingXMLIteratorTest {
     @Mock
-    public TextOutputLogger logger;
+    public Logger logger;
     @Mock
     public SimulationDescriptors simulationDescriptors;
     @Mock
