@@ -5,13 +5,6 @@ import java.io.IOException;
 
 public class CmdOutputLogger implements Logger {
     private boolean hasErrors = false;
-    protected static String path(File file) {
-        try {
-            return file.getCanonicalPath();
-        } catch (IOException ex) {
-            return file.getAbsolutePath();
-        }
-    }
     protected final String root;
     protected final String FORMAT = "[%s] %s: %s\n";
 
@@ -22,6 +15,13 @@ public class CmdOutputLogger implements Logger {
         this.root = path(root);
     }
 
+    protected static String path(File file) {
+        try {
+            return file.getCanonicalPath();
+        } catch (IOException ex) {
+            return file.getAbsolutePath();
+        }
+    }
     public boolean errored()
     {
         return hasErrors;
